@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>MediTrack - Modern Healthcare Platform</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-dim": "#d2d9f4", "on-surface-variant": "#3e4947", "on-primary-container": "#a3faef", "surface-bright": "#faf8ff", "on-primary-fixed": "#00201d", "on-tertiary-container": "#c5f3ea", "on-tertiary": "#ffffff", "outline": "#6e7977", "tertiary-container": "#467169", "surface-container": "#eaedff", "on-error-container": "#93000a", "surface-variant": "#dae2fd", "surface-container-high": "#e2e7ff", "on-primary": "#ffffff", "tertiary": "#2d5951", "outline-variant": "#bdc9c6", "on-secondary-fixed-variant": "#00504b", "on-secondary-fixed": "#00201e", "primary": "#005c55", "inverse-primary": "#80d5cb", "secondary-fixed": "#abefe8", "on-background": "#131b2e", "on-error": "#ffffff", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "surface-container-low": "#f2f3ff", "surface-container-highest": "#dae2fd", "inverse-on-surface": "#eef0ff", "on-secondary-container": "#266d68", "error-container": "#ffdad6", "inverse-surface": "#283044", "secondary-fixed-dim": "#8fd3cc", "primary-fixed": "#9cf2e8", "secondary": "#216963", "background": "#faf8ff", "on-primary-fixed-variant": "#00504a", "on-secondary": "#ffffff", "tertiary-fixed": "#bdece2", "on-tertiary-fixed": "#00201c", "tertiary-fixed-dim": "#a2d0c6", "surface": "#faf8ff", "on-tertiary-fixed-variant": "#224e47", "secondary-container": "#a8ece5", "primary-fixed-dim": "#80d5cb", "surface-tint": "#006a63", "on-surface": "#131b2e", "primary-container": "#0f766e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem" }, "fontFamily": { "display-mobile": ["Inter"], "headline-sm": ["Inter"], "display": ["Inter"], "headline-md": ["Inter"], "headline-lg-mobile": ["Inter"], "body-sm": ["Inter"], "body-md": ["Inter"], "headline-lg": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "title-md": ["Inter"] }, "fontSize": { "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-sm": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }], "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-3"><a class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="home" href="#"><img alt="MediTrack Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U7naEURooA5mFNmDaxCHWTkLSbQm5ja54xTbS2gcP3QSmHk92pKvsujoN8K7z_GRC5iEGJRnWEu7gcYx8KfGZGCdmLWXH_3UajY3u9DVcpq2AtwCpwSQLLPwe1D7xaBNItxMDg4ttbCvNi3MDqaTW94wZAUvicNaNcWO8Mqnhl-QIp7CGUXkbglsTT6tqW7g2UZlbj3-KMGBjHkloQ7yGeglHgco1dhQlWq1hVtX4Sb1W4elw1qY_Ay-rb"/><span class="font-title-md text-title-md text-primary tracking-tight">MediTrack</span></a></div><nav class="hidden md:flex items-center gap-8" data-active-classes="text-primary font-title-md"><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="home" href="#">Home</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="about-us" href="#">About Us</a><a aria-current="page" class="transition-colors text-primary font-title-md" data-path="features" href="#">Features</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="faq" href="#">FAQ</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="contact" href="#">Contact</a></nav><div class="hidden md:flex items-center gap-4"><a class="px-4 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="sign-in" href="#">Sign In</a><a class="px-5 py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="get-started" href="#">Get Started</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div><div class="flex md:hidden items-center gap-3"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Toggle navigation" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" onclick="const menu = document.getElementById('mobile-nav'); menu.classList.toggle('hidden');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div><div class="hidden md:hidden bg-surface-container-lowest px-6 pt-4 pb-6 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)]" id="mobile-nav"><nav class="flex flex-col gap-4" data-active-classes="text-primary font-title-md"><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="home" href="#">Home</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="about-us" href="#">About Us</a><a aria-current="page" class="py-1 transition-colors text-primary font-title-md" data-path="features" href="#">Features</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="faq" href="#">FAQ</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="contact" href="#">Contact</a><div class="pt-4 flex flex-col gap-3"><a class="w-full text-center py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md bg-surface-container-low rounded-lg transition-colors" data-path="sign-in" href="#">Sign In</a><a class="w-full text-center py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm transition-all" data-path="get-started" href="#">Get Started</a></div></nav></div></header><main class="flex-1 w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- Section A: Page Hero -->
+<section class="relative overflow-hidden bg-surface-container-low pt-12 pb-20 lg:pt-20 lg:pb-28">
+<!-- Subtle clinical gradient backdrop -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary-container/20 to-transparent pointer-events-none"></div>
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-secondary-fixed/30 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+<!-- Prototype Clarification Banner -->
+<div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-surface-container-lowest shadow-sm mb-8">
+<span class="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Educational Prototype</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Transparent Product Roadmap: Outlining planned capabilities versus active development.</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<p class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold mb-3">Architected For Trust &amp; Clarity</p>
+<h1 class="font-display text-display text-on-surface font-bold tracking-tight mb-6">
+            Everything designed around better appointment management.
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8 max-w-2xl">
+            Explore the features planned to help patients manage appointments and navigate their healthcare information more conveniently.
+          </p>
+<div class="flex flex-wrap items-center gap-4">
+<a class="px-6 py-3.5 bg-primary hover:bg-tertiary text-on-primary font-label-md text-label-md rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2" data-path="get-started" href="#">
+<span>Get Started</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="px-6 py-3.5 bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg shadow-sm transition-all flex items-center gap-2" data-path="contact" href="#">
+<span class="material-symbols-outlined text-primary text-[18px]">support_agent</span>
+<span>Contact Us</span>
+</a>
+</div>
+<!-- Quick Metrics Ribbon -->
+<div class="mt-12 pt-8 grid grid-cols-3 gap-6">
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">100%</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Patient-Centered Design</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">AA</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">WCAG 2.2 Accessibility Target</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary">Zero</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Unclear Clinical Jargon</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<!-- Main Hero Visualization Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-xl relative z-10">
+<div class="flex items-center justify-between pb-4 mb-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">calendar_clock</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Cardiology Consultation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">St. Jude Medical Pavilion • Suite 410</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Confirmed
+              </span>
+</div>
+<!-- Inline Telemetry Graphic -->
+<div class="bg-surface-container-low rounded-lg p-4 mb-4">
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant mb-2">
+<span class="font-medium">Scheduled Time</span>
+<span class="font-semibold text-on-surface">Tomorrow, 09:30 AM</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-3/4"></div>
+</div>
+<div class="flex justify-between items-center mt-2 text-label-sm text-outline">
+<span>Check-in available at 09:15 AM</span>
+<span>Dr. Evelyn Reed</span>
+</div>
+</div>
+<!-- Quick Action Tray inside mockup -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-3 bg-surface-container rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">directions_walk</span>
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">Arrival Steps</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Directions &amp; Parking</div>
+</div>
+</div>
+<div class="p-3 bg-surface-container rounded-lg flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">clinical_notes</span>
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">Preparation</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Fasting Protocol</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Accent Badge -->
+<div class="hidden sm:flex absolute -bottom-6 -left-6 bg-surface-container-lowest p-4 rounded-xl shadow-lg items-center gap-3 z-20">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm font-semibold text-on-surface">HIPAA Aligned Architecture</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">End-to-end encrypted session controls</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section B: Core Features (Grid of 6 Cards) -->
+<section class="py-20 lg:py-28 bg-surface">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">grid_view</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">System Capabilities</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+            Designed for deliberate clinical reliability.
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Structured around genuine patient workflows, minimizing cognitive friction when coordinating with clinical providers.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">manage_accounts</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Patient Account Access
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Reliable, modern identity access prioritizing personal identity verification and user data sovereignty.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Account registration with email verification</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Secure sign-in and sign-out sessions</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Access to personal account features and profile preferences</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Authentication layer</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">event_available</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Appointment Booking
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Clear department taxonomies and structured calendars simplify securing consultation slots.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">View available appointment options where supported</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Request or book an appointment slot with department selection</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Review comprehensive booking details prior to confirmation</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Scheduling coordinator</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">edit_calendar</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Appointment Management
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Empowering patients with live transparency over scheduled dates, changes, and clinic cancellations.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">View upcoming scheduled appointments in chronological order</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Review real-time appointment status (Confirmed, Pending, Rescheduled)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Cancel eligible appointments according to clinic policies</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Status synchronizer</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">dashboard_customize</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Patient Dashboard
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              A consolidated command center summarizing immediate actions, clinic contacts, and arrival notes.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">See relevant appointment information at a single glance</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Navigate available patient features effortlessly</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Access account information, clinic addresses, and visit reminders</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Unified interface</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">folder_shared</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Healthcare Information
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Centralizing post-visit insights and instructions without demanding technical fluency from patients.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">View information made available through the platform</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Organise relevant patient-facing visit summaries</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Support clearer access to available clinical records</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Clinical records portal</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[26px]">notifications_active</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                Core Planned Capability
+              </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-3">
+              Notifications &amp; Updates
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">
+              Timely updates ensuring care preparation instructions and changes are delivered with clarity.
+            </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Receive relevant appointment updates where notification services are implemented</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Review booking-related messages and clinic notices</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Understand important status changes without ambiguity</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-4 flex items-center text-primary font-label-md text-label-md gap-1">
+<span>Dispatch service</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section C: How MediTrack Works -->
+<section class="py-20 lg:py-28 bg-surface-container-low relative">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">Process Blueprint</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mt-2 mb-4">
+          How It Works
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+          A coherent three-phase journey connecting patient scheduling with operational clinical transparency.
+        </p>
+</div>
+<!-- 3-Step Sequential Workflow Visual -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Connecting Line for desktop -->
+<div class="hidden md:block absolute top-1/2 left-1/6 right-1/6 h-0.5 bg-surface-container-high -translate-y-8 z-0"></div>
+<!-- Step 1 -->
+<div class="relative z-10 bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-6 shadow-md">
+            1
+          </div>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary mb-2">Step 01</span>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3">
+            Register for an account.
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Simple sign-up with basic contact details and secure email confirmation to establish your protected profile.
+          </p>
+<div class="mt-6 pt-4 w-full bg-surface-container rounded-lg p-3 text-left">
+<div class="flex items-center gap-2 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+<span>Fast 2-minute enrollment</span>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-6 shadow-md">
+            2
+          </div>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary mb-2">Step 02</span>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3">
+            Access available services and manage appointments.
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Find clinical departments and choose preferred visit times suited to your calendar and healthcare necessity.
+          </p>
+<div class="mt-6 pt-4 w-full bg-surface-container rounded-lg p-3 text-left">
+<div class="flex items-center gap-2 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">medical_services</span>
+<span>Filter by medical specialty</span>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-headline-sm text-headline-sm font-bold mb-6 shadow-md">
+            3
+          </div>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-primary mb-2">Step 03</span>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-3">
+            Review appointment information and updates.
+          </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Receive confirmations and keep track of instructions, check-in schedules, and clinic arrival protocols.
+          </p>
+<div class="mt-6 pt-4 w-full bg-surface-container rounded-lg p-3 text-left">
+<div class="flex items-center gap-2 text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">task_alt</span>
+<span>Automated confirmation summaries</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section D: Designed for Patients -->
+<section class="py-20 lg:py-28 bg-surface">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">favorite</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">User Experience</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mb-6">
+            Built with deliberate patient empathy.
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed">
+            Healthcare navigation is frequently stressful. MediTrack is systematically engineered to reduce cognitive strain through calm design, high visual accessibility, and uncompromising privacy practices.
+          </p>
+<!-- High Impact Stat Block -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[28px]">shield</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md font-semibold text-on-surface">Data Sovereignty</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Role-based controls and audit logging ensure zero unsolicited data sharing.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="space-y-4">
+<!-- Feature Highlight 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-1">Simple Navigation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Clean structure, zero confusing medical jargon, and intuitive information architecture designed for any digital literacy level.</p>
+</div>
+</div>
+<!-- Feature Highlight 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">devices</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-1">Responsive Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Seamless performance and layout precision across desktop monitors, mobile phones, and tablet screens.</p>
+</div>
+</div>
+<!-- Feature Highlight 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">event_note</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-1">Clear Appointment Information</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Dates, times, clinic locations, and essential visit preparation notes presented with high visual hierarchy and sharp contrast.</p>
+</div>
+</div>
+<!-- Feature Highlight 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">accessibility_new</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-1">Accessibility Considerations</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">WCAG 2.2 AA compliant typography scales, full keyboard navigability, and screen-reader optimized component markup.</p>
+</div>
+</div>
+<!-- Feature Highlight 5 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex items-start gap-5">
+<div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+<span class="material-symbols-outlined text-[24px]">lock_reset</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-1">Privacy-Conscious Development</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Role-segregated boundaries, encrypted transport, and transparent audit trails engineered directly into prototype protocols.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section E: Future Possibilities -->
+<section class="py-20 lg:py-28 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="max-w-3xl mb-16">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">science</span>
+<span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">Product Horizons</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight mb-4">
+          Future Possibilities
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          As MediTrack evolves, we are exploring expanded capabilities to further enhance the care journey:
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Future Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Future Exploration
+              </span>
+<span class="material-symbols-outlined text-outline text-[20px]">forward_to_inbox</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-2">
+              Automated Appointment Reminders
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              SMS and email notifications prior to visits, reducing clinic no-shows and supporting patient readiness.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-outline font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Research Phase</span>
+</div>
+</div>
+<!-- Future Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Future Exploration
+              </span>
+<span class="material-symbols-outlined text-outline text-[20px]">insights</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-2">
+              Expanded Operational Reporting
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Aggregated clinic capacity and attendance analytics for providers to better allocate medical resources.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-outline font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Discovery Track</span>
+</div>
+</div>
+<!-- Future Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Future Exploration
+              </span>
+<span class="material-symbols-outlined text-outline text-[20px]">hub</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-2">
+              Additional Service Integrations
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              Exploratory connections with participating healthcare facilities, EHRs, and independent diagnostic centers.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-outline font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Integration Feasibility</span>
+</div>
+</div>
+<!-- Future Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-semibold">
+                Future Exploration
+              </span>
+<span class="material-symbols-outlined text-outline text-[20px]">history_edu</span>
+</div>
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-2">
+              Comprehensive Health Information Access
+            </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              More structured historical summaries, prescription trackers, and laboratory values as integrations permit.
+            </p>
+</div>
+<div class="mt-6 pt-4 text-outline font-label-sm text-label-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Security Architecture Review</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section F: CTA -->
+<section class="py-20 lg:py-28 bg-surface relative overflow-hidden">
+<div class="max-w-5xl mx-auto px-6 lg:px-12">
+<div class="bg-primary-container text-on-primary rounded-xl p-10 lg:p-16 text-center shadow-xl relative overflow-hidden">
+<!-- Ambient decorative circles inside container -->
+<div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-surface-bright/10 blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -right-24 w-72 h-72 rounded-full bg-secondary-fixed/20 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 max-w-2xl mx-auto">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/15 text-on-primary-container font-label-sm text-label-sm font-semibold mb-6">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+            Explore The Platform
+          </span>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-primary tracking-tight mb-4">
+            Ready to explore the MediTrack experience?
+          </h2>
+<p class="font-body-lg text-body-lg text-on-primary/90 mb-8 leading-relaxed">
+            Discover a calmer, more dependable method for managing scheduled appointments and staying informed about your clinical care.
+          </p>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="px-8 py-3.5 bg-surface-container-lowest hover:bg-surface-bright text-primary font-label-md text-label-md font-semibold rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-2" data-path="get-started" href="#">
+<span>Get Started</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="px-8 py-3.5 bg-transparent hover:bg-on-primary/10 text-on-primary font-label-md text-label-md font-medium rounded-lg shadow-sm transition-all flex items-center gap-2" data-path="contact" href="#">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Contact Us</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12"><div class="lg:col-span-1"><div class="flex items-center gap-3 mb-4"><img alt="MediTrack Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U7naEURooA5mFNmDaxCHWTkLSbQm5ja54xTbS2gcP3QSmHk92pKvsujoN8K7z_GRC5iEGJRnWEu7gcYx8KfGZGCdmLWXH_3UajY3u9DVcpq2AtwCpwSQLLPwe1D7xaBNItxMDg4ttbCvNi3MDqaTW94wZAUvicNaNcWO8Mqnhl-QIp7CGUXkbglsTT6tqW7g2UZlbj3-KMGBjHkloQ7yGeglHgco1dhQlWq1hVtX4Sb1W4elw1qY_Ay-rb"/><span class="font-title-md text-title-md text-primary tracking-tight">MediTrack</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">A modern patient-centred healthcare technology platform designed to simplify appointment management and health information access.</p></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Product</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="features" href="#">Features</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="how-it-works" href="#">How It Works</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="patient-experience" href="#">Patient Experience</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="upcoming-capabilities" href="#">Upcoming Capabilities</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Company</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="about-us" href="#">About Us</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="mission-and-vision" href="#">Mission &amp; Vision</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="core-principles" href="#">Core Principles</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact" href="#">Contact Team</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Resources</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faq" href="#">Frequently Asked Questions</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="help-and-support" href="#">Help &amp; Support</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-information" href="#">Privacy Information</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Legal</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="accessibility-statement" href="#">Accessibility Statement</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="educational-prototype-disclaimer" href="#">Educational Prototype Disclaimer</a></li></ul></div></div><div class="pt-8 mt-4 bg-surface-container-low rounded-lg p-4 text-center"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2025 MediTrack Technologies. Educational Prototype — All rights reserved.</p></div></div></footer></body></html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>MediTrack - Modern Healthcare Platform</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-dim": "#d2d9f4", "on-surface-variant": "#3e4947", "on-primary-container": "#a3faef", "surface-bright": "#faf8ff", "on-primary-fixed": "#00201d", "on-tertiary-container": "#c5f3ea", "on-tertiary": "#ffffff", "outline": "#6e7977", "tertiary-container": "#467169", "surface-container": "#eaedff", "on-error-container": "#93000a", "surface-variant": "#dae2fd", "surface-container-high": "#e2e7ff", "on-primary": "#ffffff", "tertiary": "#2d5951", "outline-variant": "#bdc9c6", "on-secondary-fixed-variant": "#00504b", "on-secondary-fixed": "#00201e", "primary": "#005c55", "inverse-primary": "#80d5cb", "secondary-fixed": "#abefe8", "on-background": "#131b2e", "on-error": "#ffffff", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "surface-container-low": "#f2f3ff", "surface-container-highest": "#dae2fd", "inverse-on-surface": "#eef0ff", "on-secondary-container": "#266d68", "error-container": "#ffdad6", "inverse-surface": "#283044", "secondary-fixed-dim": "#8fd3cc", "primary-fixed": "#9cf2e8", "secondary": "#216963", "background": "#faf8ff", "on-primary-fixed-variant": "#00504a", "on-secondary": "#ffffff", "tertiary-fixed": "#bdece2", "on-tertiary-fixed": "#00201c", "tertiary-fixed-dim": "#a2d0c6", "surface": "#faf8ff", "on-tertiary-fixed-variant": "#224e47", "secondary-container": "#a8ece5", "primary-fixed-dim": "#80d5cb", "surface-tint": "#006a63", "on-surface": "#131b2e", "primary-container": "#0f766e" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-lg": "1.5rem", "space-xl": "2.5rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem" }, "fontFamily": { "display-mobile": ["Inter"], "headline-sm": ["Inter"], "display": ["Inter"], "headline-md": ["Inter"], "headline-lg-mobile": ["Inter"], "body-sm": ["Inter"], "body-md": ["Inter"], "headline-lg": ["Inter"], "label-md": ["Inter"], "label-sm": ["Inter"], "body-lg": ["Inter"], "title-md": ["Inter"] }, "fontSize": { "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700" }], "headline-sm": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600" }], "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }], "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "title-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><div class="flex items-center gap-3"><a class="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="home" href="#"><img alt="MediTrack Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U7naEURooA5mFNmDaxCHWTkLSbQm5ja54xTbS2gcP3QSmHk92pKvsujoN8K7z_GRC5iEGJRnWEu7gcYx8KfGZGCdmLWXH_3UajY3u9DVcpq2AtwCpwSQLLPwe1D7xaBNItxMDg4ttbCvNi3MDqaTW94wZAUvicNaNcWO8Mqnhl-QIp7CGUXkbglsTT6tqW7g2UZlbj3-KMGBjHkloQ7yGeglHgco1dhQlWq1hVtX4Sb1W4elw1qY_Ay-rb"/><span class="font-title-md text-title-md text-primary tracking-tight">MediTrack</span></a></div><nav class="hidden md:flex items-center gap-8" data-active-classes="text-primary font-title-md"><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="home" href="#">Home</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="about-us" href="#">About Us</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="features" href="#">Features</a><a aria-current="page" class="transition-colors text-primary font-title-md" data-path="faq" href="#">FAQ</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors" data-path="contact" href="#">Contact</a></nav><div class="hidden md:flex items-center gap-4"><a class="px-4 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-lg" data-path="sign-in" href="#">Sign In</a><a class="px-5 py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" data-path="get-started" href="#">Get Started</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div><div class="flex md:hidden items-center gap-3"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button aria-label="Toggle navigation" class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface focus:outline-none focus:ring-2 focus:ring-primary" onclick="const menu = document.getElementById('mobile-nav'); menu.classList.toggle('hidden');" type="button"><span class="material-symbols-outlined text-[24px]">menu</span></button></div></div><div class="hidden md:hidden bg-surface-container-lowest px-6 pt-4 pb-6 shadow-[0_10px_15px_-3px_rgba(0,0,0,0.05)]" id="mobile-nav"><nav class="flex flex-col gap-4" data-active-classes="text-primary font-title-md"><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="home" href="#">Home</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="about-us" href="#">About Us</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="features" href="#">Features</a><a aria-current="page" class="py-1 transition-colors text-primary font-title-md" data-path="faq" href="#">FAQ</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md py-1 transition-colors" data-path="contact" href="#">Contact</a><div class="pt-4 flex flex-col gap-3"><a class="w-full text-center py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md bg-surface-container-low rounded-lg transition-colors" data-path="sign-in" href="#">Sign In</a><a class="w-full text-center py-2.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm transition-all" data-path="get-started" href="#">Get Started</a></div></nav></div></header><main class="flex-1 w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- SECTION A: Page Hero & Live Search -->
+<section class="relative w-full overflow-hidden bg-surface-container-low py-16 lg:py-24">
+<!-- Subtle clinical gradient backdrop -->
+<div class="absolute -top-24 right-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-20 left-10 w-80 h-80 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+<!-- Clinical Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-label-sm mb-6 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">help_center</span>
+<span>Knowledge Base &amp; Prototype Guide</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-display text-headline-lg lg:text-display text-on-surface tracking-tight max-w-3xl mb-4">
+        Frequently asked questions.
+      </h1>
+<!-- Supporting Text -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-10 leading-relaxed">
+        Find answers to common questions about MediTrack and the patient experience we’re building.
+      </p>
+<!-- Search Bar Component -->
+<div class="w-full max-w-2xl relative shadow-md rounded-xl bg-surface-container-lowest transition-all focus-within:shadow-xl focus-within:ring-2 focus-within:ring-primary/20">
+<div class="relative flex items-center h-16 px-5">
+<span class="material-symbols-outlined text-primary text-2xl mr-3 select-none">search</span>
+<input aria-label="Search questions by keyword or topic" class="w-full h-full bg-transparent text-on-surface placeholder:text-on-surface-variant/60 font-body-md text-body-md focus:outline-none pr-24" id="faq-search-input" placeholder="Search questions by keyword or topic..." type="text"/>
+<!-- Clear Button & Shortcut Badge -->
+<div class="absolute right-4 flex items-center gap-2">
+<button aria-label="Clear search" class="hidden p-1 rounded-full hover:bg-surface-container text-on-surface-variant transition-colors" id="faq-search-clear" type="button">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<kbd class="hidden sm:inline-flex items-center gap-0.5 px-2 py-1 text-label-sm font-label-sm text-on-surface-variant bg-surface-container-high rounded shadow-inner select-none border-0">
+<span class="text-[10px]">⌘</span>K
+            </kbd>
+</div>
+</div>
+</div>
+<!-- Live Search Indicator Meta -->
+<div class="h-6 mt-3 text-label-sm font-label-sm text-primary transition-opacity opacity-0 flex items-center gap-1.5" id="search-results-feedback">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span id="results-count-text">Showing matching questions</span>
+</div>
+</div>
+</section>
+<!-- SECTION B: Category Filters -->
+<section class="w-full bg-surface-container-lowest shadow-sm sticky top-20 z-30">
+<div class="max-w-5xl mx-auto px-6 py-4">
+<nav aria-label="FAQ Category Filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth" id="category-filters">
+<button class="category-btn active-category whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-primary text-on-primary shadow-sm" data-category="all" type="button">
+<span>All Questions</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container-lowest/20">10</span>
+</button>
+<button class="category-btn whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-category="general" type="button">
+<span>General</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container">4</span>
+</button>
+<button class="category-btn whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-category="accounts" type="button">
+<span>Accounts</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container">2</span>
+</button>
+<button class="category-btn whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-category="appointments" type="button">
+<span>Appointments</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container">2</span>
+</button>
+<button class="category-btn whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-category="privacy" type="button">
+<span>Privacy &amp; Security</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container">1</span>
+</button>
+<button class="category-btn whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md transition-all flex items-center gap-2 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface" data-category="support" type="button">
+<span>Technical Support</span>
+<span class="px-2 py-0.5 text-label-sm font-label-sm rounded-full bg-surface-container">1</span>
+</button>
+</nav>
+</div>
+</section>
+<!-- SECTION C: Accessible FAQ Accordion Grid -->
+<section class="w-full bg-surface py-12 lg:py-20">
+<div class="max-w-5xl mx-auto px-6">
+<!-- Informational Prototype Advisory Strip -->
+<div class="mb-10 p-5 rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-xl">biotech</span>
+</div>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Educational Phase Note</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">All architectural responses reflect current design specifications and prototype integrations.</p>
+</div>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<span class="flex h-2.5 w-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary font-medium tracking-wide">Live Demo Status</span>
+</div>
+</div>
+<!-- Accordion Items Container -->
+<div aria-label="FAQ Accordion List" class="space-y-4" id="faq-list" role="region">
+<!-- Question 1: General -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="general" data-keywords="what is meditrack platform healthcare digital technology">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">General</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">What is MediTrack?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed border-t-0">
+              MediTrack is a healthcare technology platform being developed to help patients organise appointment information and access supported healthcare services through a convenient digital experience.
+            </div>
+</div>
+</div>
+<!-- Question 2: General -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="general" data-keywords="who can use meditrack early evaluation prospective patients healthcare partners testing participants">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">General</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Who can use MediTrack?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              During our current prototype and development phase, MediTrack is available for early evaluation by prospective patients, healthcare partners, and testing participants using simulated data.
+            </div>
+</div>
+</div>
+<!-- Question 3: Accounts -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="accounts" data-keywords="how create account register email password sign in portal access">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm tracking-wider uppercase">Accounts</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">How do I create an account?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              Account registration is straightforward. Visit the registration page, enter your name and email address, and establish a secure password. Once registered, you can sign in to view prototype features.
+            </div>
+</div>
+</div>
+<!-- Question 4: Appointments -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="appointments" data-keywords="how book appointment schedule clinic doctor department time slot">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm tracking-wider uppercase">Appointments</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">How can I book an appointment?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              Within the MediTrack portal, navigate to the appointment booking section, choose a participating department or healthcare provider, select an available date and time slot, and confirm your booking request.
+            </div>
+</div>
+</div>
+<!-- Question 5: Appointments -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="appointments" data-keywords="can cancel appointment reschedule notice clinic policy refund">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm tracking-wider uppercase">Appointments</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Can I cancel an appointment?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              Yes. Patients can review upcoming visits in their dashboard and cancel eligible appointments in accordance with clinic scheduling policies and advance notice requirements.
+            </div>
+</div>
+</div>
+<!-- Question 6: General -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="general" data-keywords="laboratory results view test reports blood medical labs">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">General</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Can I view my laboratory results through MediTrack?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              Access to laboratory results depends on the features and integrations made available by MediTrack. Do not assume that results from external laboratories are available unless the relevant service is explicitly supported.
+            </div>
+</div>
+</div>
+<!-- Question 7: General -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="general" data-keywords="connect every hospital healthcare network integration clinic">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-sm text-label-sm tracking-wider uppercase">General</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">Does MediTrack connect to every hospital?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              No. Availability of hospital or clinic information depends on supported integrations and participating services in your healthcare network.
+            </div>
+</div>
+</div>
+<!-- Question 8: Privacy & Security -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="privacy" data-keywords="personal information handled privacy security compliance data hipaa access control">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm tracking-wider uppercase">Privacy &amp; Security</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">How is my personal information handled?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              Privacy-conscious design and appropriate access controls are important development priorities. The actual data-handling practices will depend on the implemented system and published privacy policy.
+            </div>
+</div>
+</div>
+<!-- Question 9: Accounts -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="accounts" data-keywords="cannot sign in login password reset recovery locked account">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm tracking-wider uppercase">Accounts</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">What should I do if I cannot sign in?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              You can use the password recovery option on the sign-in screen to request reset instructions, or contact our support team if you experience technical issues.
+            </div>
+</div>
+</div>
+<!-- Question 10: Technical Support -->
+<div class="faq-item group bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-200 overflow-hidden" data-category="support" data-keywords="contact meditrack team support help technical inquiries feedback partnership">
+<button aria-expanded="false" class="faq-trigger w-full flex items-center justify-between text-left p-6 gap-4 focus:outline-none focus-visible:bg-surface-container-low" type="button">
+<div class="flex items-center gap-3 pr-2">
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-on-surface font-label-sm text-label-sm tracking-wider uppercase">Technical Support</span>
+<span class="font-title-md text-title-md text-on-surface group-hover:text-primary transition-colors">How can I contact the MediTrack team?</span>
+</div>
+<div class="w-9 h-9 rounded-full bg-surface-container-low group-hover:bg-primary-container flex items-center justify-center shrink-0 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container transition-transform duration-300 icon-expand text-xl">expand_more</span>
+</div>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6">
+<div class="pb-6 pt-1 text-on-surface-variant font-body-md text-body-md leading-relaxed">
+              You can reach us through our online Contact Us form for general inquiries, feedback, or partnership discussions. We welcome input from both patients and healthcare professionals.
+            </div>
+</div>
+</div>
+</div>
+<!-- Zero search results state -->
+<div class="hidden text-center py-16 px-6 bg-surface-container-lowest rounded-xl shadow-sm" id="no-faq-results">
+<span class="material-symbols-outlined text-4xl text-outline mb-3">search_off</span>
+<h3 class="font-title-md text-title-md text-on-surface mb-2">No matching questions found</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm mx-auto mb-6">
+          We couldn’t find an answer matching your query. Try broadening your keywords or check our support channels.
+        </p>
+<button class="px-4 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg transition-colors" onclick="document.getElementById('faq-search-input').value = ''; document.getElementById('faq-search-input').dispatchEvent(new Event('input'));" type="button">
+          Reset Filter &amp; Search
+        </button>
+</div>
+</div>
+</section>
+<!-- Visual Break / Clinical Reliability Visual Anchor -->
+<section class="w-full max-w-5xl mx-auto px-6 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Encrypted by Design</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Built to adhere strictly to national health data protection benchmarks.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">calendar_month</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Direct Scheduling</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time availability directly synchronized with clinic master rosters.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex items-start gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">clinical_notes</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-1">Transparent Records</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Access appointment notes, check-in instructions, and test notices in one hub.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION D: Still Need Help? Callout -->
+<section class="w-full py-12 lg:py-16">
+<div class="max-w-4xl mx-auto px-6">
+<div class="bg-secondary-container/40 rounded-2xl p-8 lg:p-12 text-center shadow-md relative overflow-hidden">
+<!-- Abstract teal rings decor -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-container/50 rounded-full blur-2xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 bg-primary-fixed/40 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center mb-5 shadow-sm">
+<span class="material-symbols-outlined text-2xl">contact_support</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3 tracking-tight font-semibold">
+            Still have a question?
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mx-auto mb-8 leading-relaxed">
+            Can’t find what you’re looking for? Get in touch with the MediTrack team for further information.
+          </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-7 py-3.5 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center gap-2" data-path="contact" href="#">
+<span>Contact Us</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto px-7 py-3.5 bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center gap-2" data-path="get-started" href="#">
+<span>Get Started</span>
+<span class="material-symbols-outlined text-lg">login</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Search and Accordion JavaScript -->
+<script>
+    (function initFAQ() {
+      const searchInput = document.getElementById('faq-search-input');
+      const searchClear = document.getElementById('faq-search-clear');
+      const searchFeedback = document.getElementById('search-results-feedback');
+      const resultsCountText = document.getElementById('results-count-text');
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const faqItems = document.querySelectorAll('.faq-item');
+      const noResults = document.getElementById('no-faq-results');
+
+      let currentCategory = 'all';
+      let currentQuery = '';
+
+      // Accordion toggle behavior
+      faqItems.forEach(item => {
+        const trigger = item.querySelector('.faq-trigger');
+        const content = item.querySelector('.faq-content');
+        const icon = item.querySelector('.icon-expand');
+
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+          // Close all other accordions
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              const otherTrigger = otherItem.querySelector('.faq-trigger');
+              const otherContent = otherItem.querySelector('.faq-content');
+              const otherIcon = otherItem.querySelector('.icon-expand');
+              otherTrigger.setAttribute('aria-expanded', 'false');
+              otherContent.style.maxHeight = '0px';
+              otherIcon.style.transform = 'rotate(0deg)';
+            }
+          });
+
+          // Toggle current
+          if (isExpanded) {
+            trigger.setAttribute('aria-expanded', 'false');
+            content.style.maxHeight = '0px';
+            icon.style.transform = 'rotate(0deg)';
+          } else {
+            trigger.setAttribute('aria-expanded', 'true');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.style.transform = 'rotate(180deg)';
+          }
+        });
+      });
+
+      // Filter and Search logic
+      function updateFilter() {
+        let visibleCount = 0;
+        const normalizedQuery = currentQuery.trim().toLowerCase();
+
+        faqItems.forEach(item => {
+          const itemCategory = item.getAttribute('data-category');
+          const keywords = item.getAttribute('data-keywords') || '';
+          const questionText = item.querySelector('.faq-trigger').textContent.toLowerCase();
+          const answerText = item.querySelector('.faq-content').textContent.toLowerCase();
+
+          const matchesCategory = currentCategory === 'all' || itemCategory === currentCategory;
+          const matchesQuery = normalizedQuery === '' ||
+            questionText.includes(normalizedQuery) ||
+            answerText.includes(normalizedQuery) ||
+            keywords.toLowerCase().includes(normalizedQuery);
+
+          if (matchesCategory && matchesQuery) {
+            item.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+
+        // Search feedback banner & No Results
+        if (normalizedQuery.length > 0) {
+          searchFeedback.classList.remove('opacity-0');
+          resultsCountText.textContent = `Found ${visibleCount} question${visibleCount === 1 ? '' : 's'} matching "${normalizedQuery}"`;
+          searchClear.classList.remove('hidden');
+        } else {
+          searchFeedback.classList.add('opacity-0');
+          searchClear.classList.add('hidden');
+        }
+
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+
+      // Category filter buttons
+      categoryButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryButtons.forEach(b => {
+            b.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+            b.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+          });
+          btn.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+          btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+
+          currentCategory = btn.getAttribute('data-category');
+          updateFilter();
+        });
+      });
+
+      // Live search input
+      searchInput.addEventListener('input', (e) => {
+        currentQuery = e.target.value;
+        updateFilter();
+      });
+
+      // Clear search button
+      searchClear.addEventListener('click', () => {
+        searchInput.value = '';
+        currentQuery = '';
+        searchInput.focus();
+        updateFilter();
+      });
+
+      // Keyboard shortcut ⌘K / Ctrl+K
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-7xl mx-auto px-6 lg:px-12 pt-16 pb-12"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12"><div class="lg:col-span-1"><div class="flex items-center gap-3 mb-4"><img alt="MediTrack Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1U7naEURooA5mFNmDaxCHWTkLSbQm5ja54xTbS2gcP3QSmHk92pKvsujoN8K7z_GRC5iEGJRnWEu7gcYx8KfGZGCdmLWXH_3UajY3u9DVcpq2AtwCpwSQLLPwe1D7xaBNItxMDg4ttbCvNi3MDqaTW94wZAUvicNaNcWO8Mqnhl-QIp7CGUXkbglsTT6tqW7g2UZlbj3-KMGBjHkloQ7yGeglHgco1dhQlWq1hVtX4Sb1W4elw1qY_Ay-rb"/><span class="font-title-md text-title-md text-primary tracking-tight">MediTrack</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">A modern patient-centred healthcare technology platform designed to simplify appointment management and health information access.</p></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Product</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="features" href="#">Features</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="how-it-works" href="#">How It Works</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="patient-experience" href="#">Patient Experience</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="upcoming-capabilities" href="#">Upcoming Capabilities</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Company</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="about-us" href="#">About Us</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="mission-and-vision" href="#">Mission &amp; Vision</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="core-principles" href="#">Core Principles</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="contact" href="#">Contact Team</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Resources</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="faq" href="#">Frequently Asked Questions</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="help-and-support" href="#">Help &amp; Support</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-information" href="#">Privacy Information</a></li></ul></div><div><h4 class="font-label-md text-label-md text-on-surface mb-4 font-semibold uppercase tracking-wider">Legal</h4><ul class="space-y-2.5"><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="accessibility-statement" href="#">Accessibility Statement</a></li><li class="leading-normal"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="educational-prototype-disclaimer" href="#">Educational Prototype Disclaimer</a></li></ul></div></div><div class="pt-8 mt-4 bg-surface-container-low rounded-lg p-4 text-center"><p class="font-body-sm text-body-sm text-on-surface-variant">© 2025 MediTrack Technologies. Educational Prototype — All rights reserved.</p></div></div></footer></body></html>
