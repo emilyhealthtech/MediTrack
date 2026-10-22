@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MediTrack Patient Portal - Sign in securely to manage appointments and access healthcare services.">
+  <title>Patient Sign In - MediTrack Patient Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-container">
+    <!-- Top Educational Banner -->
+    <div class="demo-notice-banner" role="region" aria-label="Educational Prototype Notice">
+      <span aria-hidden="true">ℹ️</span>
+      <span><strong>Educational Prototype:</strong> Fictional patient portal for demonstration. No real authentication or sensitive data stored.</span>
+    </div>
+
+    <!-- Application Header -->
+    <header class="app-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand-logo" aria-label="MediTrack Homepage">
+          <div class="brand-icon" aria-hidden="true">+</div>
+          <span class="brand-text">MediTrack</span>
+          <span class="brand-tag">Patient Portal</span>
+        </a>
+        <nav class="header-nav" aria-label="Main Navigation">
+          <a href="register.html" class="nav-link">Create Account</a>
+          <a href="index.html" class="nav-link active" aria-current="page">Sign In</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="main-content">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 class="auth-title">Welcome Back</h1>
+          <p class="auth-subtitle">Sign in securely to manage your appointments, view medical notes, and communicate with your care team.</p>
+        </div>
+
+        <!-- Global Alert Box (Dynamic via script.js) -->
+        <div id="alert-container" class="alert-container" aria-live="polite"></div>
+
+        <!-- Sign-In Form -->
+        <form id="login-form" action="#" method="POST" novalidate>
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <div class="form-control-wrapper">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="patient@example.com"
+                required
+                autocomplete="email"
+                aria-required="true"
+                aria-describedby="email-error"
+              >
+            </div>
+            <div id="email-error" class="invalid-feedback" role="alert">
+              <span>⚠ Please enter a valid email address.</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">
+              <label for="password">Password</label>
+              <a href="forgot-password.html" class="link">Forgot password?</a>
+            </div>
+            <div class="form-control-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control form-control-password"
+                placeholder="Enter your password"
+                required
+                autocomplete="current-password"
+                aria-required="true"
+                aria-describedby="password-error"
+              >
+              <button
+                type="button"
+                id="toggle-password"
+                class="btn-toggle-password"
+                aria-label="Show password"
+              >
+                <span>👁 Show</span>
+              </button>
+            </div>
+            <div id="password-error" class="invalid-feedback" role="alert">
+              <span>⚠ Password is required.</span>
+            </div>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input">
+            <label for="remember-me" class="form-check-label">Remember my email on this device</label>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            Sign In
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: var(--space-6); font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+          Don't have a patient account? <a href="register.html" class="link">Create an account</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Application Footer -->
+    <footer class="app-footer">
+      <div class="footer-inner">
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+          <li><a href="#" class="footer-link">Terms of Service</a></li>
+          <li><a href="#" class="footer-link">Accessibility Statement</a></li>
+          <li><a href="#" class="footer-link">Patient Help & Support</a></li>
+        </ul>
+        <p class="footer-disclaimer">
+          MediTrack Healthcare Information System — Educational Prototype.<br>
+          Designed in accordance with WCAG 2.2 AA accessibility standards. Fictional data only.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
