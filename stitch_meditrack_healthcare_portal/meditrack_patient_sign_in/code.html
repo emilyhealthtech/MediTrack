@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "inverse-primary": "#80d5cb",
+        "surface": "#faf8ff",
+        "secondary-fixed-dim": "#8fd3cc",
+        "surface-container-low": "#f2f3ff",
+        "inverse-on-surface": "#eef0ff",
+        "on-primary-fixed": "#00201d",
+        "background": "#faf8ff",
+        "on-surface": "#131b2e",
+        "error-container": "#ffdad6",
+        "primary-container": "#0f766e",
+        "on-primary": "#ffffff",
+        "on-surface-variant": "#3e4947",
+        "on-secondary-container": "#266d68",
+        "primary-fixed": "#9cf2e8",
+        "on-tertiary-container": "#c5f3ea",
+        "surface-container": "#eaedff",
+        "on-primary-fixed-variant": "#00504a",
+        "on-primary-container": "#a3faef",
+        "on-error-container": "#93000a",
+        "surface-container-high": "#e2e7ff",
+        "secondary": "#216963",
+        "on-error": "#ffffff",
+        "primary-fixed-dim": "#80d5cb",
+        "on-secondary": "#ffffff",
+        "tertiary-container": "#467169",
+        "on-secondary-fixed": "#00201e",
+        "primary": "#005c55",
+        "surface-dim": "#d2d9f4",
+        "on-secondary-fixed-variant": "#00504b",
+        "tertiary": "#2d5951",
+        "outline-variant": "#bdc9c6",
+        "outline": "#6e7977",
+        "surface-variant": "#dae2fd",
+        "surface-bright": "#faf8ff",
+        "tertiary-fixed": "#bdece2",
+        "secondary-fixed": "#abefe8",
+        "secondary-container": "#a8ece5",
+        "on-tertiary-fixed-variant": "#224e47",
+        "surface-container-highest": "#dae2fd",
+        "on-tertiary": "#ffffff",
+        "inverse-surface": "#283044",
+        "error": "#ba1a1a",
+        "on-background": "#131b2e",
+        "surface-container-lowest": "#ffffff",
+        "tertiary-fixed-dim": "#a2d0c6",
+        "on-tertiary-fixed": "#00201c",
+        "surface-tint": "#006a63"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-md": "1rem",
+        "gutter": "1.5rem",
+        "space-sm": "0.5rem",
+        "margin": "2rem",
+        "space-lg": "1.5rem",
+        "space-xs": "0.25rem",
+        "margin-mobile": "1rem",
+        "space-xl": "2.5rem",
+        "gutter-mobile": "1rem"
+      },
+      "fontFamily": {
+        "body-lg": ["Inter"],
+        "headline-lg": ["Inter"],
+        "display": ["Inter"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Inter"],
+        "headline-lg-mobile": ["Inter"],
+        "body-sm": ["Inter"],
+        "headline-md": ["Inter"],
+        "label-md": ["Inter"],
+        "display-mobile": ["Inter"],
+        "label-sm": ["Inter"],
+        "title-md": ["Inter"]
+      },
+      "fontSize": {
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-sm": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+        "display-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><a class="flex items-center gap-space-sm text-primary" href="/"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-headline-sm font-bold"><span class="material-symbols-outlined text-[22px]">local_hospital</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary tracking-tight font-bold leading-none">MediTrack</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium leading-tight">Clinical Platform</span></div></a><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-bold"><a aria-current="page" class="transition-colors text-primary font-bold" data-path="sign-in" href="#">Sign In</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="register" href="#">Register</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="forgot-password" href="#">Help</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/">← Back to MediTrack</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 flex flex-col items-center justify-center bg-surface"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 lg:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+<!-- Left Column: Authentication Hub -->
+<div class="lg:col-span-7 flex flex-col justify-center">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 sm:p-10 transition-all duration-300">
+<!-- State Switcher Bar (Clinical Demo Utility) -->
+<div class="mb-6 bg-surface-container-low rounded-lg p-2 flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 px-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Interactive Demo View:</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 rounded font-label-sm text-label-sm font-medium bg-primary-container text-on-primary-container shadow-xs transition-colors" id="btn-state-default" type="button">Default</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-state-error" type="button">Error State</button>
+<button class="px-3 py-1 rounded font-label-sm text-label-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-state-notice" type="button">System Alert</button>
+</div>
+</div>
+<!-- Dynamic Alerts Container -->
+<div class="mb-6 hidden" id="alert-container">
+<!-- Injected via JavaScript based on switcher selection -->
+</div>
+<!-- Main Auth Header -->
+<div class="mb-8">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container mb-3">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-label-sm text-label-sm font-semibold tracking-wide">Secure Patient Portal Access</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-2">Welcome back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Sign in to manage your appointments, review clinical records, and message your dedicated care team securely.
+            </p>
+</div>
+<!-- Fast-Fill Prototype Helper Pill -->
+<div class="mb-6 flex items-center justify-between p-3 rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_box</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Evaluation Preset:</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">Elena Rostova (Patient ID #4912)</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest shadow-sm text-primary hover:bg-secondary-container font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" id="btn-quick-fill" type="button">
+<span class="material-symbols-outlined text-[14px]">auto_fix_high</span>
+              Quick-Fill
+            </button>
+</div>
+<!-- Primary Sign-In Form -->
+<form class="space-y-5" id="login-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+<!-- Email Field -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="patient-email">
+                Email address <span aria-hidden="true" class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<input autocomplete="email" class="w-full pl-11 pr-4 py-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-xs placeholder:text-on-surface-variant/50 focus:outline-none focus:bg-surface-container-lowest transition-all" id="patient-email" name="email" placeholder="Enter your registered email address" required="" type="email" value="elena.rostova@example.com"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant/80" id="email-helper">Use the email associated with your medical practice records.</p>
+</div>
+<!-- Password Field -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="patient-password">
+                  Password <span aria-hidden="true" class="text-error">*</span>
+</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold focus:outline-none" data-path="forgot-password" href="#">
+                  Forgot password?
+                </a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">key</span>
+</div>
+<input autocomplete="current-password" class="w-full pl-11 pr-12 py-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md shadow-xs placeholder:text-on-surface-variant/50 focus:outline-none transition-all" id="patient-password" name="password" placeholder="Enter your portal password" required="" type="password" value="SecuredClinical#2025!"/>
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-on-surface-variant hover:text-primary focus:outline-none" id="toggle-password" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me & Security Options -->
+<div class="flex items-center justify-between pt-1 pb-2">
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary bg-surface-container-low focus:ring-0 focus:outline-none accent-primary cursor-pointer" id="remember-device" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Remember this device for 30 days</span>
+</label>
+<div class="hidden sm:flex items-center gap-1 text-on-surface-variant" title="Protected under TLS 1.3 encryption">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span class="font-label-sm text-label-sm font-medium">Encrypted</span>
+</div>
+</div>
+<!-- Submission Button -->
+<button class="w-full min-h-[48px] py-3 px-6 rounded-lg bg-primary hover:bg-secondary text-on-primary font-title-md text-title-md flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.99] focus:outline-none" id="submit-button" type="submit">
+<span>Sign In to Clinical Portal</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Alternative Registration Links -->
+<div class="mt-8 pt-6 bg-surface-container-low/50 rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="text-center sm:text-left">
+<p class="font-body-sm text-body-sm text-on-surface">
+                New patient without an account?
+              </p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+                Activation requires your Clinic Access Token.
+              </p>
+</div>
+<a class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-surface-container-lowest text-primary hover:bg-secondary-container font-label-md text-label-md font-semibold shadow-xs transition-colors whitespace-nowrap" data-path="register" href="#">
+              Create Account
+            </a>
+</div>
+<!-- Bottom Return Link -->
+<div class="mt-6 text-center">
+<a class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="/">
+<span class="material-symbols-outlined text-[16px]">west</span>
+              Return to MediTrack Public Overview
+            </a>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Trust & Live Care Telemetry -->
+<div class="lg:col-span-5 flex flex-col justify-between gap-6">
+<!-- Reassurance Visual Card -->
+<div class="bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden shadow-lg flex-1 flex flex-col justify-between">
+<!-- Ambient Abstract Backdrop Vector -->
+<div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-primary-fixed/10 pointer-events-none blur-2xl"></div>
+<div class="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-inverse-primary/10 pointer-events-none blur-xl"></div>
+<div class="relative z-10 space-y-4">
+<div class="w-12 h-12 rounded-xl bg-on-primary/10 flex items-center justify-center text-primary-fixed backdrop-blur-sm">
+<span class="material-symbols-outlined text-[28px]">shield_with_heart</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-md text-headline-md font-bold text-on-primary tracking-tight leading-snug">
+                Patient-Centred Care at Your Fingertips
+              </h2>
+<p class="font-body-md text-body-md text-on-primary/80">
+                Directly connect with 840+ certified specialists, manage active prescriptions, and view diagnostic pathology within hours of testing.
+              </p>
+</div>
+<!-- Fictional Upcoming Consultation Schedule Chip -->
+<div class="pt-4">
+<div class="bg-on-primary/10 backdrop-blur-md rounded-xl p-4 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed font-bold">Upcoming Consultation</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed/20 text-primary-fixed font-label-sm text-label-sm font-medium">Tomorrow</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 rounded-full bg-surface-container-lowest flex items-center justify-center overflow-hidden shrink-0 shadow-xs">
+<img class="w-full h-full object-cover" data-alt="A portrait of Dr. Marcus Chen, a compassionate male cardiologist in clinical attire with stethoscope around his neck in a warm, clean medical office." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeXgxXBxgZjqzsPIWNPlVHM0qMh4G7xHF6CidbbKdbc54SvT5Vd5SyqFJNTBW9U-jOYtnRf9YlJ-d2eMEzPKaRU84NhnqIzhwMGo7LzTYcc2jaZ6BcVlF1g-mc8TV5hIhsjic1L5-BgUniLwwDGDA_ESTZVmxeRG2xkKw98bJJvKJsSClR2dk56HPE6Q2uGyGjyINzjEZ3rorKBBQFStbodyQg72Zoq-7-Vl0qitZQQj5I-Zn-xveQWw"/>
+</div>
+<div class="min-w-0 flex-1">
+<h3 class="font-title-md text-title-md font-semibold text-on-primary truncate">Dr. Marcus Chen, MD</h3>
+<p class="font-body-sm text-body-sm text-on-primary/75 truncate">Senior Cardiology • Telehealth Room 04</p>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-primary/90 pt-1 font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">schedule</span>
+<span>09:30 AM – 10:15 AM EDT</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">videocam</span>
+<span>HD Encrypted Call</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Institutional Trust Badges Grid -->
+<div class="relative z-10 pt-6 mt-6 bg-on-primary/5 rounded-lg p-4">
+<div class="grid grid-cols-2 gap-3 text-left">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[20px] shrink-0">verified</span>
+<div>
+<h4 class="font-label-sm text-label-sm font-bold text-on-primary">HIPAA Certified</h4>
+<p class="font-label-sm text-label-sm text-on-primary/70">Encrypted PHI Storage</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[20px] shrink-0">speed</span>
+<div>
+<h4 class="font-label-sm text-label-sm font-bold text-on-primary">Real-Time Sync</h4>
+<p class="font-label-sm text-label-sm text-on-primary/70">Epic &amp; Cerner Compatible</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Security & Educational Compliance Notice Card -->
+<div class="bg-surface-container-low rounded-xl p-5 shadow-xs flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div class="space-y-1">
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">Compliance &amp; Session Notice</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">
+              MediTrack sessions expire after 15 minutes of inactivity for compliance with federal health privacy standards. Educational demo session operates in simulated sandboxed mode.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // DOM element bindings
+  const togglePassBtn = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('patient-password');
+  const eyeIcon = document.getElementById('eye-icon');
+  const alertContainer = document.getElementById('alert-container');
+  const btnDefault = document.getElementById('btn-state-default');
+  const btnError = document.getElementById('btn-state-error');
+  const btnNotice = document.getElementById('btn-state-notice');
+  const quickFillBtn = document.getElementById('btn-quick-fill');
+  const emailInput = document.getElementById('patient-email');
+
+  // Password visibility toggle
+  if (togglePassBtn && passwordInput && eyeIcon) {
+    togglePassBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      eyeIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+      togglePassBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+    });
+  }
+
+  // Preset quick fill
+  if (quickFillBtn) {
+    quickFillBtn.addEventListener('click', () => {
+      emailInput.value = 'elena.rostova@example.com';
+      passwordInput.value = 'SecuredClinical#2025!';
+      emailInput.focus();
+    });
+  }
+
+  // Interactive View States (Demonstrating error and system alert styling)
+  function setActivePill(activeBtn) {
+    [btnDefault, btnError, btnNotice].forEach(btn => {
+      btn.className = 'px-3 py-1 rounded font-label-sm text-label-sm font-medium text-on-surface-variant hover:bg-surface-container transition-colors';
+    });
+    activeBtn.className = 'px-3 py-1 rounded font-label-sm text-label-sm font-medium bg-primary-container text-on-primary-container shadow-xs transition-colors';
+  }
+
+  btnDefault.addEventListener('click', () => {
+    setActivePill(btnDefault);
+    alertContainer.classList.add('hidden');
+    alertContainer.innerHTML = '';
+  });
+
+  btnError.addEventListener('click', () => {
+    setActivePill(btnError);
+    alertContainer.classList.remove('hidden');
+    alertContainer.innerHTML = `
+      <div class="p-3.5 rounded-lg bg-error-container text-on-error-container flex items-start gap-3 shadow-xs animate-in fade-in duration-200">
+        <span class="material-symbols-outlined text-[20px] text-error shrink-0 mt-0.5">error</span>
+        <div class="flex-1">
+          <p class="font-label-md text-label-md font-bold">Authentication failed</p>
+          <p class="font-label-sm text-label-sm">The email or password does not match clinical directory records. You have 3 remaining attempts before temporary security lockout.</p>
+        </div>
+      </div>
+    `;
+  });
+
+  btnNotice.addEventListener('click', () => {
+    setActivePill(btnNotice);
+    alertContainer.classList.remove('hidden');
+    alertContainer.innerHTML = `
+      <div class="p-3.5 rounded-lg bg-surface-container-high text-on-surface flex items-start gap-3 shadow-xs animate-in fade-in duration-200">
+        <span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">campaign</span>
+        <div class="flex-1">
+          <p class="font-label-md text-label-md font-bold">Scheduled Telehealth Maintenance</p>
+          <p class="font-label-sm text-label-sm text-on-surface-variant">Scheduled clinical infrastructure upgrades will take place Sunday from 02:00 to 04:00 EDT. Messaging will remain online.</p>
+        </div>
+      </div>
+    `;
+  });
+
+  function handleFormSubmit() {
+    const submitBtn = document.getElementById('submit-button');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
+      <span>Authenticating Credential...</span>
+    `;
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px]">check_circle</span>
+        <span>Identity Verified &bull; Redirecting...</span>
+      `;
+    }, 1200);
+  }
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.02)] py-space-lg mt-auto"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left"><div class="flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-on-surface-variant">MediTrack Clinical Security: HIPAA Compliant • 256-bit SSL Encrypted • ISO 27001 Certified</p><p class="font-label-sm text-label-sm text-on-surface-variant/70">© 2025 MediTrack Health Systems, Inc. For authorized clinical &amp; research personnel only.</p></div><div class="flex items-center flex-wrap justify-center gap-space-md"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><span class="text-outline-variant">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a><span class="text-outline-variant">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="accessibility-statement" href="#">Accessibility Statement</a></div></div></footer></body></html>

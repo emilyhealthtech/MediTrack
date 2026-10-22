@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "inverse-primary": "#80d5cb",
+        "surface": "#faf8ff",
+        "secondary-fixed-dim": "#8fd3cc",
+        "surface-container-low": "#f2f3ff",
+        "inverse-on-surface": "#eef0ff",
+        "on-primary-fixed": "#00201d",
+        "background": "#faf8ff",
+        "on-surface": "#131b2e",
+        "error-container": "#ffdad6",
+        "primary-container": "#0f766e",
+        "on-primary": "#ffffff",
+        "on-surface-variant": "#3e4947",
+        "on-secondary-container": "#266d68",
+        "primary-fixed": "#9cf2e8",
+        "on-tertiary-container": "#c5f3ea",
+        "surface-container": "#eaedff",
+        "on-primary-fixed-variant": "#00504a",
+        "on-primary-container": "#a3faef",
+        "on-error-container": "#93000a",
+        "surface-container-high": "#e2e7ff",
+        "secondary": "#216963",
+        "on-error": "#ffffff",
+        "primary-fixed-dim": "#80d5cb",
+        "on-secondary": "#ffffff",
+        "tertiary-container": "#467169",
+        "on-secondary-fixed": "#00201e",
+        "primary": "#005c55",
+        "surface-dim": "#d2d9f4",
+        "on-secondary-fixed-variant": "#00504b",
+        "tertiary": "#2d5951",
+        "outline-variant": "#bdc9c6",
+        "outline": "#6e7977",
+        "surface-variant": "#dae2fd",
+        "surface-bright": "#faf8ff",
+        "tertiary-fixed": "#bdece2",
+        "secondary-fixed": "#abefe8",
+        "secondary-container": "#a8ece5",
+        "on-tertiary-fixed-variant": "#224e47",
+        "surface-container-highest": "#dae2fd",
+        "on-tertiary": "#ffffff",
+        "inverse-surface": "#283044",
+        "error": "#ba1a1a",
+        "on-background": "#131b2e",
+        "surface-container-lowest": "#ffffff",
+        "tertiary-fixed-dim": "#a2d0c6",
+        "on-tertiary-fixed": "#00201c",
+        "surface-tint": "#006a63"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-md": "1rem",
+        "gutter": "1.5rem",
+        "space-sm": "0.5rem",
+        "margin": "2rem",
+        "space-lg": "1.5rem",
+        "space-xs": "0.25rem",
+        "margin-mobile": "1rem",
+        "space-xl": "2.5rem",
+        "gutter-mobile": "1rem"
+      },
+      "fontFamily": {
+        "body-lg": ["Inter"],
+        "headline-lg": ["Inter"],
+        "display": ["Inter"],
+        "body-md": ["Inter"],
+        "headline-sm": ["Inter"],
+        "headline-lg-mobile": ["Inter"],
+        "body-sm": ["Inter"],
+        "headline-md": ["Inter"],
+        "label-md": ["Inter"],
+        "display-mobile": ["Inter"],
+        "label-sm": ["Inter"],
+        "title-md": ["Inter"]
+      },
+      "fontSize": {
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+        "display": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-sm": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "headline-md": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+        "display-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+        "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "600"}]
+      }
+    }
+  }
+}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between"><a class="flex items-center gap-space-sm text-primary" href="/"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container font-headline-sm font-bold"><span class="material-symbols-outlined text-[22px]">local_hospital</span></div><div class="flex flex-col"><span class="font-title-md text-title-md text-primary tracking-tight font-bold leading-none">MediTrack</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium leading-tight">Clinical Platform</span></div></a><nav class="flex items-center gap-space-lg" data-active-classes="text-primary font-bold"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="sign-in" href="#">Sign In</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="register" href="#">Register</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="forgot-password" href="#">Help</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="/">← Back to MediTrack</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 flex flex-col items-center justify-center bg-surface"><div class="flex flex-col w-full py-space-xl px-gutter items-center justify-center relative overflow-hidden">
+<div class="absolute -top-32 -left-24 w-96 h-96 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-32 -right-20 w-96 h-96 rounded-full bg-secondary-fixed/20 blur-3xl pointer-events-none"></div>
+<div class="w-full max-w-[560px] flex flex-col gap-space-lg relative z-10">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Verification Step 2 of 3</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>256-bit Encrypted</span>
+</div>
+</div>
+<!-- Active Pending Card -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md p-space-lg md:p-space-xl flex flex-col gap-space-lg transition-all duration-300" id="pending-state-card">
+<div class="flex flex-col items-center text-center gap-space-sm">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary-container shadow-sm mb-space-xs">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">mark_email_read</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface">Verify your email address</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          We've prepared a verification step to help confirm your email address before you continue.
+        </p>
+</div>
+<!-- Masked Recipient Pill -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]">alternate_email</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Recipient email</span>
+<span class="font-title-md text-title-md text-on-surface truncate" id="target-email-display">j***@example.com</span>
+</div>
+</div>
+<button class="shrink-0 px-space-sm py-space-xs rounded font-label-md text-label-md text-primary hover:bg-secondary-container transition-colors" id="edit-email-btn" type="button">
+          Edit
+        </button>
+</div>
+<!-- Inline Edit Email Panel (Hidden by default) -->
+<div class="hidden bg-surface-container rounded-lg p-space-md flex-col gap-space-sm" id="edit-email-panel">
+<label class="font-label-md text-label-md text-on-surface" for="new-email-input">Update recipient address</label>
+<div class="flex gap-space-sm">
+<input class="flex-1 bg-surface-container-lowest rounded-lg px-space-md py-space-xs font-body-sm text-body-sm text-on-surface focus:outline-none" id="new-email-input" placeholder="Enter updated clinical email" type="email" value="dr.johnson@saintjude-clinic.org"/>
+<button class="bg-primary text-on-primary px-space-md py-space-xs rounded-lg font-label-md text-label-md hover:bg-secondary transition-colors" id="save-email-btn" type="button">
+            Save
+          </button>
+</div>
+</div>
+<!-- Simulated Token Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">info</span>
+<span class="font-semibold">Simulated Clinical Link</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          A secure verification link has been simulated for your prototype account. Please click the button below to simulate verification or check your simulated inbox.
+        </p>
+</div>
+<!-- Action Button -->
+<div class="flex flex-col gap-space-sm">
+<button class="w-full min-h-[44px] bg-primary-container text-on-primary rounded-lg font-title-md text-title-md shadow-sm hover:bg-primary transition-all flex items-center justify-center gap-space-xs py-space-sm" id="simulate-verify-btn" type="button">
+<span>Verify Email</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<button class="font-label-md text-label-md text-primary hover:text-secondary flex items-center gap-space-xs transition-colors" id="resend-btn" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span id="resend-label">Resend verification email</span>
+</button>
+<div class="flex items-center gap-space-md font-label-md text-label-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors" id="change-email-link" type="button">
+              Change email address
+            </button>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-space-xs" href="/login">
+<span class="material-symbols-outlined text-[16px]">login</span>
+<span>Back to Sign In</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Verification Token Expiry Callout -->
+<div class="flex items-center gap-space-xs text-on-surface-variant bg-surface-container-lowest rounded-lg p-space-xs justify-center">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-sm text-label-sm">Links expire after 24 hours for account security</span>
+</div>
+</div>
+<!-- Verified Success Feedback State (Dynamic Card) -->
+<div class="hidden bg-surface-container-lowest rounded-xl shadow-md p-space-lg md:p-space-xl flex-col gap-space-lg text-center items-center" id="verified-state-card">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[36px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">Identity Confirmed</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Email verified successfully</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+          Your email address has been verified. You can continue to sign in to MediTrack.
+        </p>
+</div>
+<div class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-center gap-space-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+<span class="font-label-md text-label-md">HIPAA verification token bound to account session</span>
+</div>
+<div class="flex flex-col w-full gap-space-sm pt-space-xs">
+<a class="w-full min-h-[44px] bg-primary text-on-primary rounded-lg font-title-md text-title-md shadow-sm hover:bg-secondary transition-all flex items-center justify-center gap-space-xs py-space-sm" href="/login">
+<span>Continue to Sign In</span>
+<span class="material-symbols-outlined text-[20px]">login</span>
+</a>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors py-space-xs" id="toggle-preview-back" type="button">
+          Return to verification screen view
+        </button>
+</div>
+</div>
+<!-- State Preview / Inspection Toggle Accordion -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-sm">
+<button class="w-full px-space-md py-space-sm flex items-center justify-between text-left hover:bg-surface-container transition-colors" id="accordion-toggle" type="button">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[18px]">developer_mode</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Clinician Prototype State Preview</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm" id="accordion-state-label">Toggle Success Mode</span>
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200" id="accordion-icon">expand_more</span>
+</div>
+</button>
+<div class="hidden p-space-md bg-surface-container-lowest flex flex-col gap-space-sm" id="accordion-content">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Switch between states to preview both email dispatch modes and the confirmation dashboard payload for healthcare auditors.
+        </p>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<button class="px-space-md py-space-xs rounded font-label-sm text-label-sm bg-surface-container-highest text-on-surface hover:bg-surface-dim transition-colors font-semibold" id="preview-pending-btn" type="button">
+            Show Pending State
+          </button>
+<button class="px-space-md py-space-xs rounded font-label-sm text-label-sm bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-colors font-semibold" id="preview-verified-btn" type="button">
+            Show Verified State
+          </button>
+</div>
+</div>
+</div>
+<!-- Security Microcopy & Compliance Assurance -->
+<div class="flex flex-col items-center text-center gap-space-xs pt-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span class="font-label-sm text-label-sm font-medium">MediTrack Security Shield</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+        MediTrack will never ask for your password or medical history in an email.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  (() => {
+    const pendingCard = document.getElementById('pending-state-card');
+    const verifiedCard = document.getElementById('verified-state-card');
+    const simulateVerifyBtn = document.getElementById('simulate-verify-btn');
+    const toggleBackBtn = document.getElementById('toggle-preview-back');
+    const resendBtn = document.getElementById('resend-btn');
+    const resendLabel = document.getElementById('resend-label');
+    const editEmailBtn = document.getElementById('edit-email-btn');
+    const changeEmailLink = document.getElementById('change-email-link');
+    const editEmailPanel = document.getElementById('edit-email-panel');
+    const saveEmailBtn = document.getElementById('save-email-btn');
+    const newEmailInput = document.getElementById('new-email-input');
+    const targetEmailDisplay = document.getElementById('target-email-display');
+    const accordionToggle = document.getElementById('accordion-toggle');
+    const accordionContent = document.getElementById('accordion-content');
+    const accordionIcon = document.getElementById('accordion-icon');
+    const previewPendingBtn = document.getElementById('preview-pending-btn');
+    const previewVerifiedBtn = document.getElementById('preview-verified-btn');
+
+    let countdown = 0;
+    let timer = null;
+
+    function showVerified() {
+      pendingCard.classList.add('hidden');
+      verifiedCard.classList.remove('hidden');
+      verifiedCard.classList.add('flex');
+    }
+
+    function showPending() {
+      verifiedCard.classList.add('hidden');
+      verifiedCard.classList.remove('flex');
+      pendingCard.classList.remove('hidden');
+    }
+
+    simulateVerifyBtn.addEventListener('click', showVerified);
+    toggleBackBtn.addEventListener('click', showPending);
+    previewVerifiedBtn.addEventListener('click', showVerified);
+    previewPendingBtn.addEventListener('click', showPending);
+
+    function toggleEditPanel() {
+      const isHidden = editEmailPanel.classList.contains('hidden');
+      if (isHidden) {
+        editEmailPanel.classList.remove('hidden');
+        editEmailPanel.classList.add('flex');
+        newEmailInput.focus();
+      } else {
+        editEmailPanel.classList.add('hidden');
+        editEmailPanel.classList.remove('flex');
+      }
+    }
+
+    editEmailBtn.addEventListener('click', toggleEditPanel);
+    changeEmailLink.addEventListener('click', toggleEditPanel);
+
+    saveEmailBtn.addEventListener('click', () => {
+      const val = newEmailInput.value.trim();
+      if (val) {
+        const parts = val.split('@');
+        if (parts.length === 2 && parts[0].length > 1) {
+          targetEmailDisplay.textContent = parts[0][0] + '***@' + parts[1];
+        } else {
+          targetEmailDisplay.textContent = val;
+        }
+        toggleEditPanel();
+      }
+    });
+
+    resendBtn.addEventListener('click', () => {
+      if (countdown > 0) return;
+      countdown = 30;
+      resendBtn.setAttribute('disabled', 'true');
+      resendBtn.classList.add('opacity-60', 'cursor-not-allowed');
+
+      const updateLabel = () => {
+        if (countdown > 0) {
+          resendLabel.textContent = 'Resend verification email (' + countdown + 's)';
+          countdown--;
+          timer = setTimeout(updateLabel, 1000);
+        } else {
+          resendLabel.textContent = 'Resend verification email';
+          resendBtn.removeAttribute('disabled');
+          resendBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+        }
+      };
+      updateLabel();
+    });
+
+    accordionToggle.addEventListener('click', () => {
+      const isClosed = accordionContent.classList.contains('hidden');
+      if (isClosed) {
+        accordionContent.classList.remove('hidden');
+        accordionIcon.style.transform = 'rotate(180deg)';
+      } else {
+        accordionContent.classList.add('hidden');
+        accordionIcon.style.transform = 'rotate(0deg)';
+      }
+    });
+  })();
+</script></main><footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.02)] py-space-lg mt-auto"><div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left"><div class="flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-on-surface-variant">MediTrack Clinical Security: HIPAA Compliant • 256-bit SSL Encrypted • ISO 27001 Certified</p><p class="font-label-sm text-label-sm text-on-surface-variant/70">© 2025 MediTrack Health Systems, Inc. For authorized clinical &amp; research personnel only.</p></div><div class="flex items-center flex-wrap justify-center gap-space-md"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-policy" href="#">Privacy Policy</a><span class="text-outline-variant">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="terms-of-service" href="#">Terms of Service</a><span class="text-outline-variant">•</span><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" data-path="accessibility-statement" href="#">Accessibility Statement</a></div></div></footer></body></html>
