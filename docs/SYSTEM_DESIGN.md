@@ -6,7 +6,7 @@ MediTrack is a multi-tenant SaaS application built for Nigerian healthcare facil
 ## 2. Monorepo Architecture
 The platform is structured as an npm workspaces monorepo:
 - `apps/web`: Next.js frontend with Tailwind CSS based on the "Clinical Clarity" Google Stitch design system.
-- `apps/api`: Node.js & Express REST API (`/api/v1`) with security headers (Helmet), CORS, Pino logging, and Zod validation.
+- `apps/api`: Node.js & Express REST API (`/api/v1`) with security headers (Helmet), CORS, Pino logging, Zod validation, Argon2id password hashing, and HttpOnly session cookies.
 - `packages/database`: Prisma schema defining PostgreSQL entities for multi-tenant isolation.
 - `packages/shared`: Shared TypeScript domain types, DTOs, and Zod schemas.
 
@@ -14,7 +14,7 @@ The platform is structured as an npm workspaces monorepo:
 ```
   [ Next.js Frontend (apps/web) ]
                  |
-                 v (REST API over HTTPS)
+                 v (REST API over HTTPS with HttpOnly Cookie)
   [ Express.js Backend API (apps/api) ]
           |                  |
           v                  v

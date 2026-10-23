@@ -1,0 +1,12 @@
+
+> dev
+> npm run dev --workspaces --if-present
+
+
+> @meditrack/api@1.0.0 dev
+> tsc --watch
+
+[2J[3J[H11:12:25 AM - Starting compilation in watch mode...
+
+
+11:12:28 AM - Found 0 errors. Watching for file changes.
