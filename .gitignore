@@ -1,0 +1,33 @@
+# Node / dependencies
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Next.js build output
+apps/web/.next/
+apps/web/out/
+
+# Express build output
+apps/api/dist/
+
+# Database / Prisma build output
+packages/database/dist/
+packages/database/generated/
+packages/database/*.db
+packages/database/*.db-journal
+
+# Shared build output
+packages/shared/dist/
+
+# Environment files and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# IDE / OS files
+.DS_Store
+.vscode/
+.idea/
