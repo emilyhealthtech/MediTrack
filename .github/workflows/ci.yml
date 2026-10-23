@@ -26,6 +26,9 @@ jobs:
       - name: Validate Prisma Schema
         run: DATABASE_URL="postgresql://test:test@localhost:5432/meditrack" npx prisma validate --schema=packages/database/prisma/schema.prisma
 
+      - name: Build Shared Packages
+        run: npm run build --workspace=@meditrack/shared && npm run build --workspace=@meditrack/database
+
       - name: Run Type Checks
         run: npm run typecheck
 

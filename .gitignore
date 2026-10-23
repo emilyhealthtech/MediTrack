@@ -8,6 +8,7 @@ yarn-error.log*
 # Next.js build output
 apps/web/.next/
 apps/web/out/
+*.tsbuildinfo
 
 # Express build output
 apps/api/dist/
