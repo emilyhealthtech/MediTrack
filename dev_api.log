@@ -1,0 +1,32 @@
+
+> @meditrack/api@1.0.0 dev
+> tsc --watch
+
+[2J[3J[H1:37:54 PM - Starting compilation in watch mode...
+
+
+1:37:58 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:42:30 PM - File change detected. Starting incremental compilation...
+
+
+1:42:30 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:42:56 PM - File change detected. Starting incremental compilation...
+
+
+1:42:57 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H2:06:34 PM - File change detected. Starting incremental compilation...
+
+
+2:06:35 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H2:07:05 PM - File change detected. Starting incremental compilation...
+
+
+2:07:07 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H2:07:17 PM - File change detected. Starting incremental compilation...
+
+
+2:07:17 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H2:07:19 PM - File change detected. Starting incremental compilation...
+
+
+2:07:19 PM - Found 0 errors. Watching for file changes.

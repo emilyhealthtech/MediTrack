@@ -31,6 +31,37 @@ enum SubscriptionStatus {
   EXPIRED
 }
 
+enum HealthInfoSource {
+  PATIENT_ENTERED
+  CLINICIAN_VERIFIED
+}
+
+enum AllergySeverity {
+  MILD
+  MODERATE
+  SEVERE
+  LIFE_THREATENING
+}
+
+enum ConditionStatus {
+  ACTIVE
+  RESOLVED
+  CHRONIC
+}
+
+enum MedicationStatus {
+  ACTIVE
+  DISCONTINUED
+}
+
+enum MedicalHistoryCategory {
+  SURGERY
+  HOSPITALIZATION
+  IMMUNIZATION
+  FAMILY_HISTORY
+  GENERAL
+}
+
 model User {
   id            String       @id @default(uuid())
   email         String       @unique
@@ -45,6 +76,11 @@ model User {
   memberships   Membership[]
   patientProfile Patient?
   auditEvents   AuditEvent[]
+
+  verifiedAllergies       PatientAllergy[]        @relation("VerifiedAllergies")
+  verifiedConditions      PatientCondition[]      @relation("VerifiedConditions")
+  verifiedMedications     PatientMedication[]     @relation("VerifiedMedications")
+  verifiedMedicalHistory  PatientMedicalHistory[] @relation("VerifiedMedicalHistory")
 
   @@map("users")
 }
@@ -101,22 +137,114 @@ model Membership {
 }
 
 model Patient {
-  id             String       @id @default(uuid())
-  userId         String       @unique
-  organizationId String?
-  dateOfBirth    DateTime?
-  gender         String?
-  bloodGroup     String?
-  genotype       String?      // e.g., AA, AS, SS
-  emergencyContact String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id                         String       @id @default(uuid())
+  userId                     String       @unique
+  organizationId             String?
+  dateOfBirth                DateTime?
+  gender                     String?
+  bloodGroup                 String?
+  genotype                   String?      // e.g., AA, AS, SS
+  emergencyContact           String?
+  emergencyContactName       String?
+  emergencyContactPhone      String?
+  emergencyContactRelationship String?
+  address                    String?
+  city                       String?
+  state                      String?
+  createdAt                  DateTime     @default(now())
+  updatedAt                  DateTime     @updatedAt
 
-  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
-  appointments   Appointment[]
+  user                       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization               Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  appointments               Appointment[]
+
+  allergies                  PatientAllergy[]
+  conditions                 PatientCondition[]
+  medications                PatientMedication[]
+  medicalHistory             PatientMedicalHistory[]
 
   @@map("patients")
+}
+
+model PatientAllergy {
+  id                    String          @id @default(uuid())
+  patientId             String
+  allergen              String
+  severity              AllergySeverity @default(MODERATE)
+  reaction              String?
+  source                HealthInfoSource @default(PATIENT_ENTERED)
+  isVerifiedByClinician Boolean         @default(false)
+  verifiedByUserId      String?
+  verifiedAt            DateTime?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  patient               Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  verifiedByUser        User?           @relation("VerifiedAllergies", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
+
+  @@map("patient_allergies")
+}
+
+model PatientCondition {
+  id                    String          @id @default(uuid())
+  patientId             String
+  conditionName         String
+  diagnosedDate         DateTime?
+  status                ConditionStatus @default(ACTIVE)
+  source                HealthInfoSource @default(PATIENT_ENTERED)
+  isVerifiedByClinician Boolean         @default(false)
+  verifiedByUserId      String?
+  verifiedAt            DateTime?
+  notes                 String?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  patient               Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  verifiedByUser        User?           @relation("VerifiedConditions", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
+
+  @@map("patient_conditions")
+}
+
+model PatientMedication {
+  id                    String           @id @default(uuid())
+  patientId             String
+  medicationName        String
+  dosage                String?
+  frequency             String?
+  startDate             DateTime?
+  endDate               DateTime?
+  status                MedicationStatus @default(ACTIVE)
+  source                HealthInfoSource @default(PATIENT_ENTERED)
+  isVerifiedByClinician Boolean          @default(false)
+  verifiedByUserId      String?
+  verifiedAt            DateTime?
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+
+  patient               Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  verifiedByUser        User?            @relation("VerifiedMedications", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
+
+  @@map("patient_medications")
+}
+
+model PatientMedicalHistory {
+  id                    String                 @id @default(uuid())
+  patientId             String
+  title                 String
+  description           String?
+  eventDate             DateTime?
+  category              MedicalHistoryCategory @default(GENERAL)
+  source                HealthInfoSource       @default(PATIENT_ENTERED)
+  isVerifiedByClinician Boolean                @default(false)
+  verifiedByUserId      String?
+  verifiedAt            DateTime?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+
+  patient               Patient                @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  verifiedByUser        User?                  @relation("VerifiedMedicalHistory", fields: [verifiedByUserId], references: [id], onDelete: SetNull)
+
+  @@map("patient_medical_history")
 }
 
 model Appointment {
@@ -170,6 +298,7 @@ model Subscription {
 model AuditEvent {
   id          String   @id @default(uuid())
   userId      String?
+  organizationId String?
   action      String
   entity      String
   entityId    String?
