@@ -1,0 +1,23 @@
+
+> @meditrack/web@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1995ms
+ ○ Compiling /patient/dashboard ...
+ ✓ Compiled /patient/dashboard in 5.9s (557 modules)
+ ✓ Compiled in 796ms (282 modules)
+ GET /patient/dashboard 200 in 6761ms
+ ○ Compiling /patient/health-profile ...
+ ✓ Compiled /patient/health-profile in 2.4s (557 modules)
+ GET /patient/health-profile 200 in 2588ms
+ ✓ Compiled /staff/patients in 326ms (573 modules)
+ GET /staff/patients 200 in 404ms
+ ✓ Compiled in 492ms (297 modules)
+ ✓ Compiled in 230ms (297 modules)
+ ✓ Compiled in 354ms (297 modules)
+ ✓ Compiled in 2.8s (297 modules)
+ ✓ Compiled in 285ms (297 modules)

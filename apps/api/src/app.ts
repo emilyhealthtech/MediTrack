@@ -10,6 +10,7 @@ import { authRouter } from './routes/auth.routes';
 import { organizationRouter } from './routes/organization.routes';
 import { meRouter } from './routes/me.routes';
 import { facilityRouter } from './routes/facility.routes';
+import { patientRouter } from './routes/patient.routes';
 
 dotenv.config();
 
@@ -32,7 +33,7 @@ app.get('/api/v1/health', (req: Request, res: Response) => {
     status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'MediTrack Core API',
-    version: '1.0.0-phase2',
+    version: '1.0.0-phase3',
   });
 });
 
@@ -73,11 +74,12 @@ app.post('/api/v1/contact', (req: Request, res: Response, next: NextFunction) =>
   }
 });
 
-// Mount Phase 2 Feature Routers
+// Mount Feature Routers
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/organizations', organizationRouter);
 app.use('/api/v1/admin', organizationRouter);
 app.use('/api/v1/me', meRouter);
+app.use('/api/v1/patients', patientRouter);
 app.use('/api/v1', facilityRouter);
 
 // Centralized error handler

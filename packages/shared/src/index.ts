@@ -183,6 +183,99 @@ export const PatientFacilityConnectionSchema = z.object({
 
 export type PatientFacilityConnectionInput = z.infer<typeof PatientFacilityConnectionSchema>;
 
+// Phase 3 — Patient Management & Health Profile Schemas
+
+export const UpdatePatientProfileSchema = z.object({
+  fullName: z.string().min(2, 'Full name must be at least 2 characters').optional(),
+  phoneNumber: z.string().nullable().optional(),
+  dateOfBirth: z.string().nullable().optional(),
+  gender: z.string().nullable().optional(),
+  bloodGroup: z.string().nullable().optional(),
+  genotype: z.string().nullable().optional(),
+  emergencyContact: z.string().nullable().optional(),
+  emergencyContactName: z.string().nullable().optional(),
+  emergencyContactPhone: z.string().nullable().optional(),
+  emergencyContactRelationship: z.string().nullable().optional(),
+  address: z.string().nullable().optional(),
+  city: z.string().nullable().optional(),
+  state: z.string().nullable().optional(),
+});
+
+export type UpdatePatientProfileInput = z.infer<typeof UpdatePatientProfileSchema>;
+
+export const CreatePatientRecordSchema = z.object({
+  fullName: z.string().min(2, 'Full name is required'),
+  email: z.string().email('Valid email address is required'),
+  phoneNumber: z.string().optional(),
+  dateOfBirth: z.string().optional(),
+  gender: z.string().optional(),
+  bloodGroup: z.string().optional(),
+  genotype: z.string().optional(),
+  emergencyContactName: z.string().optional(),
+  emergencyContactPhone: z.string().optional(),
+  emergencyContactRelationship: z.string().optional(),
+  emergencyContact: z.string().optional(),
+  address: z.string().optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+});
+
+export type CreatePatientRecordInput = z.infer<typeof CreatePatientRecordSchema>;
+
+export const PatientAllergySchema = z.object({
+  allergen: z.string().min(1, 'Allergen name is required'),
+  severity: z.enum(['MILD', 'MODERATE', 'SEVERE', 'LIFE_THREATENING']).default('MODERATE'),
+  reaction: z.string().optional(),
+});
+
+export type PatientAllergyInput = z.infer<typeof PatientAllergySchema>;
+
+export const PatientConditionSchema = z.object({
+  conditionName: z.string().min(1, 'Condition name is required'),
+  diagnosedDate: z.string().optional(),
+  status: z.enum(['ACTIVE', 'RESOLVED', 'CHRONIC']).default('ACTIVE'),
+  notes: z.string().optional(),
+});
+
+export type PatientConditionInput = z.infer<typeof PatientConditionSchema>;
+
+export const PatientMedicationSchema = z.object({
+  medicationName: z.string().min(1, 'Medication name is required'),
+  dosage: z.string().optional(),
+  frequency: z.string().optional(),
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  status: z.enum(['ACTIVE', 'DISCONTINUED']).default('ACTIVE'),
+});
+
+export type PatientMedicationInput = z.infer<typeof PatientMedicationSchema>;
+
+export const PatientMedicalHistorySchema = z.object({
+  title: z.string().min(1, 'Title is required'),
+  description: z.string().optional(),
+  eventDate: z.string().optional(),
+  category: z.enum(['SURGERY', 'HOSPITALIZATION', 'IMMUNIZATION', 'FAMILY_HISTORY', 'GENERAL']).default('GENERAL'),
+});
+
+export type PatientMedicalHistoryInput = z.infer<typeof PatientMedicalHistorySchema>;
+
+export const VerifyHealthItemSchema = z.object({
+  verified: z.boolean().default(true),
+  notes: z.string().optional(),
+});
+
+export type VerifyHealthItemInput = z.infer<typeof VerifyHealthItemSchema>;
+
+export const PatientSearchQuerySchema = z.object({
+  query: z.string().optional(),
+  completionStatus: z.enum(['ALL', 'COMPLETE', 'INCOMPLETE']).optional(),
+  gender: z.string().optional(),
+  page: z.string().optional().transform((val) => (val ? parseInt(val, 10) : 1)),
+  limit: z.string().optional().transform((val) => (val ? parseInt(val, 10) : 20)),
+});
+
+export type PatientSearchQueryInput = z.infer<typeof PatientSearchQuerySchema>;
+
 // API Response Standard Format
 export interface ApiResponse<T = unknown> {
   success: boolean;
