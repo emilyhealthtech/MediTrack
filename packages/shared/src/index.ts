@@ -276,6 +276,109 @@ export const PatientSearchQuerySchema = z.object({
 
 export type PatientSearchQueryInput = z.infer<typeof PatientSearchQuerySchema>;
 
+// Phase 4 — Appointment & Clinical Record Schemas
+
+export const CreateAppointmentSchema = z.object({
+  organizationId: z.string().min(1, 'Organization ID is required').optional(),
+  facilityId: z.string().min(1, 'Facility ID is required'),
+  patientId: z.string().min(1, 'Patient ID is required').optional(),
+  providerId: z.string().optional(),
+  scheduledAt: z.string().min(1, 'Scheduled date and time is required'),
+  durationMinutes: z.number().int().min(5).max(480).default(30),
+  department: z.string().min(1, 'Department is required'),
+  reason: z.string().optional(),
+  mode: z.enum(['IN_PERSON', 'VIRTUAL', 'TELEPHONE']).default('IN_PERSON'),
+  timeZone: z.string().default('Africa/Lagos'),
+  notes: z.string().optional(),
+});
+
+export type CreateAppointmentInput = z.infer<typeof CreateAppointmentSchema>;
+
+export const RescheduleAppointmentSchema = z.object({
+  scheduledAt: z.string().min(1, 'New scheduled date and time is required'),
+  durationMinutes: z.number().int().min(5).max(480).optional(),
+  reason: z.string().optional(),
+});
+
+export type RescheduleAppointmentInput = z.infer<typeof RescheduleAppointmentSchema>;
+
+export const CancelAppointmentSchema = z.object({
+  cancellationReason: z.string().min(1, 'Cancellation reason is required'),
+});
+
+export type CancelAppointmentInput = z.infer<typeof CancelAppointmentSchema>;
+
+export const UpdateAppointmentStatusSchema = z.object({
+  status: z.enum(['REQUESTED', 'SCHEDULED', 'CONFIRMED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'NO_SHOW']),
+  cancellationReason: z.string().optional(),
+  notes: z.string().optional(),
+});
+
+export type UpdateAppointmentStatusInput = z.infer<typeof UpdateAppointmentStatusSchema>;
+
+export const ProviderAvailabilitySchema = z.object({
+  facilityId: z.string().min(1, 'Facility ID is required'),
+  providerId: z.string().min(1, 'Provider ID is required'),
+  dayOfWeek: z.number().int().min(0).max(6),
+  startTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Format must be HH:MM'),
+  endTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, 'Format must be HH:MM'),
+  slotDurationMinutes: z.number().int().min(5).max(240).default(30),
+});
+
+export type ProviderAvailabilityInput = z.infer<typeof ProviderAvailabilitySchema>;
+
+export const VitalsSchema = z.object({
+  temperatureCelsius: z.number().optional(),
+  bloodPressureSystolic: z.number().optional(),
+  bloodPressureDiastolic: z.number().optional(),
+  heartRateBpm: z.number().optional(),
+  respiratoryRateBpm: z.number().optional(),
+  oxygenSaturationPercent: z.number().optional(),
+  heightCm: z.number().optional(),
+  weightKg: z.number().optional(),
+});
+
+export type VitalsInput = z.infer<typeof VitalsSchema>;
+
+export const CreateEncounterSchema = z.object({
+  organizationId: z.string().optional(),
+  facilityId: z.string().min(1, 'Facility ID is required'),
+  patientId: z.string().min(1, 'Patient ID is required'),
+  appointmentId: z.string().optional(),
+  encounterDate: z.string().optional(),
+  chiefComplaint: z.string().optional(),
+  historyOfPresentIllness: z.string().optional(),
+  assessment: z.string().optional(),
+  plan: z.string().optional(),
+  vitals: VitalsSchema.optional(),
+  isConfidential: z.boolean().default(false),
+});
+
+export type CreateEncounterInput = z.infer<typeof CreateEncounterSchema>;
+
+export const UpdateEncounterSchema = z.object({
+  chiefComplaint: z.string().optional(),
+  historyOfPresentIllness: z.string().optional(),
+  assessment: z.string().optional(),
+  plan: z.string().optional(),
+  vitals: VitalsSchema.optional(),
+  isConfidential: z.boolean().optional(),
+});
+
+export type UpdateEncounterInput = z.infer<typeof UpdateEncounterSchema>;
+
+export const AmendEncounterSchema = z.object({
+  reason: z.string().min(3, 'Reason for amendment is required'),
+  chiefComplaint: z.string().optional(),
+  historyOfPresentIllness: z.string().optional(),
+  assessment: z.string().optional(),
+  plan: z.string().optional(),
+  vitals: VitalsSchema.optional(),
+  isConfidential: z.boolean().optional(),
+});
+
+export type AmendEncounterInput = z.infer<typeof AmendEncounterSchema>;
+
 // API Response Standard Format
 export interface ApiResponse<T = unknown> {
   success: boolean;
