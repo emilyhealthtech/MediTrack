@@ -4,10 +4,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit",
-    "prisma:generate": "prisma generate",
-    "prisma:push": "prisma db push"
+    "build": "prisma generate --schema=prisma/schema.prisma && tsc",
+    "typecheck": "prisma generate --schema=prisma/schema.prisma && tsc --noEmit",
+    "prisma:generate": "prisma generate --schema=prisma/schema.prisma",
+    "prisma:push": "prisma db push --schema=prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.9.1"
