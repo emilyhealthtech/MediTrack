@@ -26,14 +26,33 @@ All API endpoints are versioned under `/api/v1`.
 - `POST /api/v1/auth/mfa/challenge` — Verify TOTP code during sign in.
 - `POST /api/v1/auth/mfa/recovery` — Sign in using emergency recovery code.
 
-### Organizations & Onboarding
+### Organizations, Administration & Reporting
 - `POST /api/v1/organizations/apply` — Submit healthcare organization application.
 - `GET /api/v1/organizations/applications` — List applications (Platform Admin).
 - `GET /api/v1/organizations/applications/:id` — Get application details.
 - `POST /api/v1/admin/organizations/applications/:id/review` — Approve or reject application.
+- `GET /api/v1/organizations/:id` — Get organization details and metrics.
+- `PATCH /api/v1/organizations/:id` — Update organization settings (Facility Admin).
+- `GET /api/v1/organizations/:id/members` — List organization members and roles.
+- `PATCH /api/v1/organizations/:id/members/:memberId` — Update member role or activate/deactivate status (Facility Admin).
+- `DELETE /api/v1/organizations/:id/members/:memberId` — Remove or deactivate member (Facility Admin).
 - `POST /api/v1/organizations/:id/invitations` — Invite staff member (Facility Admin).
+- `GET /api/v1/organizations/:id/invitations` — List pending invitations (Facility Admin).
+- `DELETE /api/v1/organizations/:id/invitations/:invitationId` — Revoke pending staff invitation (Facility Admin).
+- `GET /api/v1/organizations/:id/reports/summary` — Operational reporting summary (appointment status breakdown, patient registrations, staff metrics).
+- `GET /api/v1/organizations/:id/audit-logs` — Administrative audit trail history (Facility Admin).
 - `GET /api/v1/invitations/:token` — Retrieve invitation details by token.
 - `POST /api/v1/invitations/accept` — Accept staff invitation and join practice.
+
+### Appointments & Integration
+- `GET /api/v1/appointments/me` — Get patient personal appointments.
+- `POST /api/v1/appointments/me` — Book new appointment (Patient).
+- `PUT /api/v1/appointments/me/:id/reschedule` — Reschedule appointment (Patient).
+- `PUT /api/v1/appointments/me/:id/cancel` — Cancel appointment (Patient).
+- `GET /api/v1/appointments` — List organization appointments (Staff).
+- `POST /api/v1/appointments` — Book appointment (Staff).
+- `PATCH /api/v1/appointments/:id/status` — Update appointment status (Staff).
+- `GET /api/v1/appointments/:id/ics` — Export iCalendar (.ics) event file.
 
 ### User Memberships & Active Context
 - `GET /api/v1/me/memberships` — List organization memberships for authenticated user.

@@ -5,6 +5,8 @@ import {
   OrganizationReviewSchema,
   StaffInviteSchema,
   AcceptInviteSchema,
+  UpdateOrganizationSchema,
+  UpdateMemberRoleSchema,
 } from '@meditrack/shared';
 import { AuthService } from '../services/auth.service';
 import { EmailService } from '../services/email.service';
@@ -64,6 +66,400 @@ organizationRouter.post('/apply', async (req: Request, res: Response, next: Next
     return next(error);
   }
 });
+
+// 8. Get Organization Details
+organizationRouter.get(
+  '/:id',
+  requireAuth,
+  requireOrgMembership(),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+      const org = await db.organization.findUnique({
+        where: { id: orgId },
+        include: {
+          facilities: true,
+          subscriptions: { include: { plan: true } },
+          _count: {
+            select: {
+              memberships: true,
+              facilities: true,
+              patients: true,
+            },
+          },
+        },
+      });
+
+      if (!org) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Organization not found.' },
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: org,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 9. Update Organization Settings (Org Admin)
+organizationRouter.patch(
+  '/:id',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+      const updateData = UpdateOrganizationSchema.parse(req.body);
+
+      const updatedOrg = await db.organization.update({
+        where: { id: orgId },
+        data: {
+          ...(updateData.name && { name: updateData.name }),
+          ...(updateData.rcNumber !== undefined && { rcNumber: updateData.rcNumber }),
+        },
+      });
+
+      await db.auditEvent.create({
+        data: {
+          userId: req.user!.id,
+          organizationId: orgId,
+          action: 'ORG_SETTINGS_UPDATED',
+          entity: 'Organization',
+          entityId: orgId,
+          detailsJson: JSON.stringify(updateData),
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Organization settings updated successfully.',
+        data: updatedOrg,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 10. List Organization Members
+organizationRouter.get(
+  '/:id/members',
+  requireAuth,
+  requireOrgMembership(),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+      const memberships = await db.membership.findMany({
+        where: { organizationId: orgId },
+        include: {
+          user: {
+            select: {
+              id: true,
+              email: true,
+              fullName: true,
+              phoneNumber: true,
+              role: true,
+              createdAt: true,
+            },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: memberships,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 11. Update Member Role / Status (Org Admin)
+organizationRouter.patch(
+  '/:id/members/:memberId',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id: orgId, memberId } = req.params;
+
+      // Security Check: Administrators CANNOT grant themselves or others permissions beyond authorized role model (e.g. SYSTEM_ADMIN)
+      if ((req.body as any).role === 'SYSTEM_ADMIN') {
+        return res.status(403).json({
+          success: false,
+          error: {
+            code: 'UNAUTHORIZED_ROLE_ASSIGNMENT',
+            message: 'Organization administrators cannot grant system administration privileges.',
+          },
+        });
+      }
+
+      const { role, isActive } = UpdateMemberRoleSchema.parse(req.body);
+
+      const membership = await db.membership.findFirst({
+        where: { id: memberId, organizationId: orgId },
+      });
+
+      if (!membership) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Membership record not found.' },
+        });
+      }
+
+      const updatedMembership = await db.membership.update({
+        where: { id: memberId },
+        data: {
+          ...(role && { role: role as any }),
+          ...(isActive !== undefined && { isActive }),
+        },
+        include: {
+          user: {
+            select: { id: true, email: true, fullName: true, role: true },
+          },
+        },
+      });
+
+      await db.auditEvent.create({
+        data: {
+          userId: req.user!.id,
+          organizationId: orgId,
+          action: 'MEMBER_ROLE_UPDATED',
+          entity: 'Membership',
+          entityId: memberId,
+          detailsJson: JSON.stringify({ role, isActive }),
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Member updated successfully.',
+        data: updatedMembership,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 12. Deactivate / Remove Member (Org Admin)
+organizationRouter.delete(
+  '/:id/members/:memberId',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id: orgId, memberId } = req.params;
+
+      const membership = await db.membership.findFirst({
+        where: { id: memberId, organizationId: orgId },
+      });
+
+      if (!membership) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Membership record not found.' },
+        });
+      }
+
+      await db.membership.delete({
+        where: { id: memberId },
+      });
+
+      await db.auditEvent.create({
+        data: {
+          userId: req.user!.id,
+          organizationId: orgId,
+          action: 'MEMBER_REMOVED',
+          entity: 'Membership',
+          entityId: memberId,
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Member removed from organization.',
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 13. List Pending Invitations (Org Admin)
+organizationRouter.get(
+  '/:id/invitations',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+      const invitations = await db.invitation.findMany({
+        where: { organizationId: orgId, acceptedAt: null },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: invitations,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 14. Revoke Invitation (Org Admin)
+organizationRouter.delete(
+  '/:id/invitations/:invitationId',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id: orgId, invitationId } = req.params;
+
+      const invitation = await db.invitation.findFirst({
+        where: { id: invitationId, organizationId: orgId },
+      });
+
+      if (!invitation) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Invitation not found.' },
+        });
+      }
+
+      await db.invitation.delete({
+        where: { id: invitationId },
+      });
+
+      await db.auditEvent.create({
+        data: {
+          userId: req.user!.id,
+          organizationId: orgId,
+          action: 'STAFF_INVITATION_REVOKED',
+          entity: 'Invitation',
+          entityId: invitationId,
+          ipAddress: req.ip,
+          userAgent: req.headers['user-agent'],
+        },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Invitation revoked successfully.',
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 15. Operational Reporting Summary
+organizationRouter.get(
+  '/:id/reports/summary',
+  requireAuth,
+  requireOrgMembership(),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+
+      // Aggregated totals
+      const [
+        totalAppointments,
+        scheduledAppointments,
+        completedAppointments,
+        cancelledAppointments,
+        noShowAppointments,
+        totalPatients,
+        totalMembers,
+        activeMembers,
+        totalEncounters,
+      ] = await Promise.all([
+        db.appointment.count({ where: { organizationId: orgId } }),
+        db.appointment.count({ where: { organizationId: orgId, status: 'SCHEDULED' } }),
+        db.appointment.count({ where: { organizationId: orgId, status: 'COMPLETED' } }),
+        db.appointment.count({ where: { organizationId: orgId, status: 'CANCELLED' } }),
+        db.appointment.count({ where: { organizationId: orgId, status: 'NO_SHOW' } }),
+        db.patient.count({ where: { organizationId: orgId } }),
+        db.membership.count({ where: { organizationId: orgId } }),
+        db.membership.count({ where: { organizationId: orgId, isActive: true } }),
+        db.encounter.count({ where: { organizationId: orgId } }),
+      ]);
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          organizationId: orgId,
+          generatedAt: new Date().toISOString(),
+          appointments: {
+            total: totalAppointments,
+            byStatus: {
+              scheduled: scheduledAppointments,
+              completed: completedAppointments,
+              cancelled: cancelledAppointments,
+              noShow: noShowAppointments,
+            },
+          },
+          patients: {
+            total: totalPatients,
+          },
+          memberships: {
+            total: totalMembers,
+            active: activeMembers,
+            inactive: totalMembers - activeMembers,
+          },
+          clinicalActivity: {
+            totalEncounters,
+          },
+        },
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// 16. Administrative Audit History
+organizationRouter.get(
+  '/:id/audit-logs',
+  requireAuth,
+  requireOrgMembership('FACILITY_ADMIN'),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const orgId = req.params.id;
+      const logs = await db.auditEvent.findMany({
+        where: { organizationId: orgId },
+        include: {
+          user: { select: { id: true, fullName: true, email: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+        take: 100,
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: logs,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
 
 // 2. List Applications (Platform Admin)
 organizationRouter.get(
