@@ -15,12 +15,25 @@ enum Role {
 }
 
 enum AppointmentStatus {
+  REQUESTED
   SCHEDULED
   CONFIRMED
   IN_PROGRESS
   COMPLETED
   CANCELLED
   NO_SHOW
+}
+
+enum ConsultationMode {
+  IN_PERSON
+  VIRTUAL
+  TELEPHONE
+}
+
+enum EncounterStatus {
+  DRAFT
+  SIGNED
+  AMENDED
 }
 
 enum SubscriptionStatus {
@@ -82,6 +95,12 @@ model User {
   verifiedMedications     PatientMedication[]     @relation("VerifiedMedications")
   verifiedMedicalHistory  PatientMedicalHistory[] @relation("VerifiedMedicalHistory")
 
+  providerAppointments    Appointment[]           @relation("ProviderAppointments")
+  providerAvailabilities  ProviderAvailability[]
+  clinicianEncounters     Encounter[]             @relation("ClinicianEncounters")
+  signedEncounters        Encounter[]             @relation("SignedEncounters")
+  encounterAmendments     EncounterAmendment[]
+
   @@map("users")
 }
 
@@ -94,11 +113,13 @@ model Organization {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
 
-  facilities    Facility[]
-  memberships   Membership[]
-  subscriptions Subscription[]
-  patients      Patient[]
-  appointments  Appointment[]
+  facilities             Facility[]
+  memberships            Membership[]
+  subscriptions          Subscription[]
+  patients               Patient[]
+  appointments           Appointment[]
+  providerAvailabilities ProviderAvailability[]
+  encounters             Encounter[]
 
   @@map("organizations")
 }
@@ -115,8 +136,10 @@ model Facility {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  appointments   Appointment[]
+  organization           Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  appointments           Appointment[]
+  providerAvailabilities ProviderAvailability[]
+  encounters             Encounter[]
 
   @@map("facilities")
 }
@@ -162,6 +185,7 @@ model Patient {
   conditions                 PatientCondition[]
   medications                PatientMedication[]
   medicalHistory             PatientMedicalHistory[]
+  encounters                 Encounter[]
 
   @@map("patients")
 }
@@ -248,23 +272,96 @@ model PatientMedicalHistory {
 }
 
 model Appointment {
-  id             String            @id @default(uuid())
-  organizationId String
-  facilityId     String
-  patientId      String
-  scheduledAt    DateTime
-  department     String
-  reason         String?
-  status         AppointmentStatus @default(SCHEDULED)
-  notes          String?
-  createdAt      DateTime          @default(now())
-  updatedAt      DateTime          @updatedAt
+  id                 String            @id @default(uuid())
+  organizationId     String
+  facilityId         String
+  patientId          String
+  providerId         String?
+  scheduledAt        DateTime
+  durationMinutes    Int               @default(30)
+  department         String
+  reason             String?
+  mode               ConsultationMode  @default(IN_PERSON)
+  timeZone           String            @default("Africa/Lagos")
+  status             AppointmentStatus @default(SCHEDULED)
+  notes              String?
+  cancellationReason String?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
 
-  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  facility       Facility          @relation(fields: [facilityId], references: [id], onDelete: Cascade)
-  patient        Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  organization       Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  facility           Facility          @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  patient            Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  provider           User?             @relation("ProviderAppointments", fields: [providerId], references: [id], onDelete: SetNull)
+  encounters         Encounter[]
 
   @@map("appointments")
+}
+
+model ProviderAvailability {
+  id                 String       @id @default(uuid())
+  organizationId     String
+  facilityId         String
+  providerId         String
+  dayOfWeek          Int          // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  startTime          String       // "08:00"
+  endTime            String       // "17:00"
+  slotDurationMinutes Int         @default(30)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  facility           Facility     @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  provider           User         @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@unique([facilityId, providerId, dayOfWeek])
+  @@map("provider_availabilities")
+}
+
+model Encounter {
+  id                      String               @id @default(uuid())
+  organizationId          String
+  facilityId              String
+  patientId               String
+  appointmentId           String?
+  clinicianId             String
+  status                  EncounterStatus      @default(DRAFT)
+  encounterDate           DateTime             @default(now())
+  chiefComplaint          String?
+  historyOfPresentIllness String?
+  assessment              String?
+  plan                    String?
+  vitalsJson              String?              // Encoded JSON object for vital signs
+  isConfidential          Boolean              @default(false)
+  signedAt                DateTime?
+  signedById              String?
+  createdAt               DateTime             @default(now())
+  updatedAt               DateTime             @updatedAt
+
+  organization            Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  facility                Facility             @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  patient                 Patient              @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  appointment             Appointment?         @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  clinician               User                 @relation("ClinicianEncounters", fields: [clinicianId], references: [id], onDelete: Restrict)
+  signedBy                User?                @relation("SignedEncounters", fields: [signedById], references: [id], onDelete: SetNull)
+  amendments              EncounterAmendment[]
+
+  @@map("encounters")
+}
+
+model EncounterAmendment {
+  id               String       @id @default(uuid())
+  encounterId      String
+  amendedById      String
+  reason           String
+  previousDataJson String
+  newDataJson      String
+  createdAt        DateTime     @default(now())
+
+  encounter        Encounter    @relation(fields: [encounterId], references: [id], onDelete: Cascade)
+  amendedBy        User         @relation(fields: [amendedById], references: [id], onDelete: Restrict)
+
+  @@map("encounter_amendments")
 }
 
 model SubscriptionPlan {

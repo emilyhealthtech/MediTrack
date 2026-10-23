@@ -11,6 +11,8 @@ import { organizationRouter } from './routes/organization.routes';
 import { meRouter } from './routes/me.routes';
 import { facilityRouter } from './routes/facility.routes';
 import { patientRouter } from './routes/patient.routes';
+import { appointmentRouter } from './routes/appointment.routes';
+import { encounterRouter } from './routes/encounter.routes';
 
 dotenv.config();
 
@@ -80,6 +82,8 @@ app.use('/api/v1/organizations', organizationRouter);
 app.use('/api/v1/admin', organizationRouter);
 app.use('/api/v1/me', meRouter);
 app.use('/api/v1/patients', patientRouter);
+app.use('/api/v1/appointments', appointmentRouter);
+app.use('/api/v1/encounters', encounterRouter);
 app.use('/api/v1', facilityRouter);
 
 // Centralized error handler
