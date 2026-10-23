@@ -23,8 +23,10 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Validate Prisma Schema
-        run: DATABASE_URL="postgresql://test:test@localhost:5432/meditrack" npx prisma validate --schema=packages/database/prisma/schema.prisma
+      - name: Validate & Generate Prisma Schema
+        run: |
+          DATABASE_URL="postgresql://test:test@localhost:5432/meditrack" npx prisma validate --schema=packages/database/prisma/schema.prisma
+          DATABASE_URL="postgresql://test:test@localhost:5432/meditrack" npx prisma generate --schema=packages/database/prisma/schema.prisma
 
       - name: Build Shared Packages
         run: npm run build --workspace=@meditrack/shared && npm run build --workspace=@meditrack/database

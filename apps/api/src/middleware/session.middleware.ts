@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { db } from '@meditrack/database';
 import { AuthService } from '../services/auth.service';
 
+const prisma = db as any;
+
 declare global {
   namespace Express {
     interface Request {
@@ -31,7 +33,7 @@ export async function sessionMiddleware(req: Request, res: Response, next: NextF
 
     const tokenHash = AuthService.hashToken(token);
 
-    const session = await db.session.findUnique({
+    const session = await prisma.session.findUnique({
       where: { tokenHash },
       include: {
         user: {

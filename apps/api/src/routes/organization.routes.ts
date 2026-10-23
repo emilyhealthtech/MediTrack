@@ -11,6 +11,8 @@ import { EmailService } from '../services/email.service';
 import { requireAuth, requireRole, requireOrgMembership } from '../middleware/auth.middleware';
 import { logger } from '../logger';
 
+const prisma = db as any;
+
 export const organizationRouter = Router();
 
 // 1. Submit Healthcare Organization Application (Public)
@@ -18,7 +20,7 @@ organizationRouter.post('/apply', async (req: Request, res: Response, next: Next
   try {
     const data = OrganizationApplySchema.parse(req.body);
 
-    const existingApp = await db.organizationApplication.findUnique({
+    const existingApp = await prisma.organizationApplication.findUnique({
       where: { slug: data.slug.toLowerCase() },
     });
 
@@ -32,7 +34,7 @@ organizationRouter.post('/apply', async (req: Request, res: Response, next: Next
       });
     }
 
-    const application = await db.organizationApplication.create({
+    const application = await prisma.organizationApplication.create({
       data: {
         organizationName: data.organizationName,
         slug: data.slug.toLowerCase(),
@@ -45,7 +47,7 @@ organizationRouter.post('/apply', async (req: Request, res: Response, next: Next
       },
     });
 
-    await db.auditEvent.create({
+    await prisma.auditEvent.create({
       data: {
         action: 'ORG_APPLICATION_SUBMITTED',
         entity: 'OrganizationApplication',
@@ -72,7 +74,7 @@ organizationRouter.get(
   requireRole('SYSTEM_ADMIN'),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const applications = await db.organizationApplication.findMany({
+      const applications = await prisma.organizationApplication.findMany({
         orderBy: { createdAt: 'desc' },
       });
 
@@ -91,7 +93,7 @@ organizationRouter.get(
   '/applications/:id',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const application = await db.organizationApplication.findUnique({
+      const application = await prisma.organizationApplication.findUnique({
         where: { id: req.params.id },
       });
 
@@ -125,7 +127,7 @@ organizationRouter.post(
       const { action, notes } = OrganizationReviewSchema.parse(req.body);
       const appId = req.params.id;
 
-      const application = await db.organizationApplication.findUnique({
+      const application = await prisma.organizationApplication.findUnique({
         where: { id: appId },
       });
 
@@ -144,7 +146,7 @@ organizationRouter.post(
       }
 
       if (action === 'REJECT') {
-        const updated = await db.organizationApplication.update({
+        const updated = await prisma.organizationApplication.update({
           where: { id: appId },
           data: {
             status: 'REJECTED',
@@ -169,7 +171,7 @@ organizationRouter.post(
       }
 
       // Approve workflow: Create Organization, Default Facility, and Admin User/Membership
-      const createdOrg = await db.$transaction(async (tx: any) => {
+      const createdOrg = await prisma.$transaction(async (tx: any) => {
         const org = await tx.organization.create({
           data: {
             name: application.organizationName,
@@ -274,7 +276,7 @@ organizationRouter.post(
       const { email, role } = StaffInviteSchema.parse(req.body);
       const organizationId = req.params.id;
 
-      const org = await db.organization.findUnique({
+      const org = await prisma.organization.findUnique({
         where: { id: organizationId },
       });
 
@@ -289,7 +291,7 @@ organizationRouter.post(
       const tokenHash = AuthService.hashToken(rawToken);
       const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
-      const invitation = await db.invitation.create({
+      const invitation = await prisma.invitation.create({
         data: {
           organizationId,
           email: email.toLowerCase(),
@@ -302,7 +304,7 @@ organizationRouter.post(
 
       await EmailService.sendStaffInvitationEmail(email, rawToken, org.name, role);
 
-      await db.auditEvent.create({
+      await prisma.auditEvent.create({
         data: {
           userId: req.user!.id,
           organizationId,
@@ -337,7 +339,7 @@ organizationRouter.get('/invitations/:token', async (req: Request, res: Response
     const rawToken = req.params.token;
     const tokenHash = AuthService.hashToken(rawToken);
 
-    const invitation = await db.invitation.findUnique({
+    const invitation = await prisma.invitation.findUnique({
       where: { tokenHash },
       include: { organization: true },
     });
@@ -373,7 +375,7 @@ organizationRouter.post('/invitations/accept', async (req: Request, res: Respons
     const { token, fullName, password, phoneNumber } = AcceptInviteSchema.parse(req.body);
     const tokenHash = AuthService.hashToken(token);
 
-    const invitation = await db.invitation.findUnique({
+    const invitation = await prisma.invitation.findUnique({
       where: { tokenHash },
       include: { organization: true },
     });
@@ -388,13 +390,13 @@ organizationRouter.post('/invitations/accept', async (req: Request, res: Respons
       });
     }
 
-    let user = await db.user.findUnique({
+    let user = await prisma.user.findUnique({
       where: { email: invitation.email.toLowerCase() },
     });
 
     if (!user) {
       const passwordHash = await AuthService.hashPassword(password);
-      user = await db.user.create({
+      user = await prisma.user.create({
         data: {
           email: invitation.email.toLowerCase(),
           passwordHash,
@@ -406,7 +408,7 @@ organizationRouter.post('/invitations/accept', async (req: Request, res: Respons
       });
     } else {
       if (invitation.role === 'FACILITY_ADMIN' && user.role !== 'SYSTEM_ADMIN') {
-        await db.user.update({
+        await prisma.user.update({
           where: { id: user.id },
           data: { role: 'FACILITY_ADMIN', isVerified: true },
         });
@@ -414,7 +416,7 @@ organizationRouter.post('/invitations/accept', async (req: Request, res: Respons
     }
 
     // Upsert Membership
-    await db.membership.upsert({
+    await prisma.membership.upsert({
       where: {
         userId_organizationId: {
           userId: user.id,
@@ -430,12 +432,12 @@ organizationRouter.post('/invitations/accept', async (req: Request, res: Respons
     });
 
     // Mark invitation as accepted
-    await db.invitation.update({
+    await prisma.invitation.update({
       where: { id: invitation.id },
       data: { acceptedAt: new Date() },
     });
 
-    await db.auditEvent.create({
+    await prisma.auditEvent.create({
       data: {
         userId: user.id,
         organizationId: invitation.organizationId,

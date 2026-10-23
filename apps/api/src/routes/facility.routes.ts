@@ -3,6 +3,8 @@ import { db } from '@meditrack/database';
 import { PatientFacilityConnectionSchema } from '@meditrack/shared';
 import { requireAuth } from '../middleware/auth.middleware';
 
+const prisma = db as any;
+
 export const facilityRouter = Router();
 
 // 1. Search Public Facilities
@@ -31,7 +33,7 @@ facilityRouter.get('/public/facilities', async (req: Request, res: Response, nex
       whereClause.city = { equals: city.trim(), mode: 'insensitive' };
     }
 
-    const facilities = await db.facility.findMany({
+    const facilities = await prisma.facility.findMany({
       where: whereClause,
       include: {
         organization: {
@@ -73,7 +75,7 @@ facilityRouter.post(
         });
       }
 
-      const facility = await db.facility.findUnique({
+      const facility = await prisma.facility.findUnique({
         where: { id: facilityId },
       });
 
@@ -85,7 +87,7 @@ facilityRouter.post(
       }
 
       // Check if connection request already exists
-      const existing = await db.patientFacilityConnection.findUnique({
+      const existing = await prisma.patientFacilityConnection.findUnique({
         where: {
           patientId_facilityId: {
             patientId: req.patientProfile.id,
@@ -105,7 +107,7 @@ facilityRouter.post(
       }
 
       // Create PENDING connection request
-      const connection = await db.patientFacilityConnection.create({
+      const connection = await prisma.patientFacilityConnection.create({
         data: {
           patientId: req.patientProfile.id,
           facilityId,
@@ -119,7 +121,7 @@ facilityRouter.post(
         },
       });
 
-      await db.auditEvent.create({
+      await prisma.auditEvent.create({
         data: {
           userId: req.user!.id,
           organizationId: facility.organizationId,
@@ -156,7 +158,7 @@ facilityRouter.get(
         });
       }
 
-      const connections = await db.patientFacilityConnection.findMany({
+      const connections = await prisma.patientFacilityConnection.findMany({
         where: { patientId: req.patientProfile.id },
         include: {
           facility: {

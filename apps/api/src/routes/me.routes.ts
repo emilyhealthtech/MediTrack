@@ -3,6 +3,8 @@ import { db } from '@meditrack/database';
 import { SetActiveContextSchema } from '@meditrack/shared';
 import { requireAuth } from '../middleware/auth.middleware';
 
+const prisma = db as any;
+
 export const meRouter = Router();
 
 // 1. Get User Memberships
@@ -10,7 +12,7 @@ meRouter.get('/memberships', requireAuth, async (req: Request, res: Response, ne
   try {
     const userId = req.user!.id;
 
-    const memberships = await db.membership.findMany({
+    const memberships = await prisma.membership.findMany({
       where: { userId },
       include: {
         organization: {
@@ -37,7 +39,7 @@ meRouter.post('/active-context', requireAuth, async (req: Request, res: Response
     const userId = req.user!.id;
 
     if (req.user!.role !== 'SYSTEM_ADMIN') {
-      const membership = await db.membership.findUnique({
+      const membership = await prisma.membership.findUnique({
         where: {
           userId_organizationId: {
             userId,
@@ -58,7 +60,7 @@ meRouter.post('/active-context', requireAuth, async (req: Request, res: Response
     }
 
     if (facilityId) {
-      const facility = await db.facility.findFirst({
+      const facility = await prisma.facility.findFirst({
         where: {
           id: facilityId,
           organizationId,
@@ -76,7 +78,7 @@ meRouter.post('/active-context', requireAuth, async (req: Request, res: Response
       }
     }
 
-    await db.session.update({
+    await prisma.session.update({
       where: { id: req.session!.id },
       data: {
         activeOrganizationId: organizationId,
@@ -84,7 +86,7 @@ meRouter.post('/active-context', requireAuth, async (req: Request, res: Response
       },
     });
 
-    await db.auditEvent.create({
+    await prisma.auditEvent.create({
       data: {
         userId,
         organizationId,

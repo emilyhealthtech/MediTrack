@@ -19,6 +19,8 @@ import { requireAuth, requireMfa } from '../middleware/auth.middleware';
 import { rateLimiter } from '../middleware/rate-limit.middleware';
 import { logger } from '../logger';
 
+const prisma = db as any;
+
 export const authRouter = Router();
 
 /**
@@ -35,7 +37,7 @@ async function createSessionAndSetCookie(
   const tokenHash = AuthService.hashToken(rawSessionToken);
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-  const session = await db.session.create({
+  const session = await prisma.session.create({
     data: {
       userId,
       tokenHash,
@@ -76,7 +78,7 @@ authRouter.post(
     try {
       const data = PatientRegisterSchema.parse(req.body);
 
-      const existingUser = await db.user.findUnique({
+      const existingUser = await prisma.user.findUnique({
         where: { email: data.email.toLowerCase() },
       });
 
@@ -92,7 +94,7 @@ authRouter.post(
 
       const passwordHash = await AuthService.hashPassword(data.password);
 
-      const user = await db.user.create({
+      const user = await prisma.user.create({
         data: {
           email: data.email.toLowerCase(),
           passwordHash,
@@ -118,7 +120,7 @@ authRouter.post(
       const tokenHash = AuthService.hashToken(rawVerifyToken);
       const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
 
-      await db.emailVerificationToken.create({
+      await prisma.emailVerificationToken.create({
         data: {
           userId: user.id,
           tokenHash,
@@ -130,7 +132,7 @@ authRouter.post(
       await EmailService.sendVerificationEmail(user.email, rawVerifyToken);
 
       // Log audit event
-      await db.auditEvent.create({
+      await prisma.auditEvent.create({
         data: {
           userId: user.id,
           action: 'USER_REGISTERED',
@@ -184,7 +186,7 @@ authRouter.post(
     try {
       const data = LoginSchema.parse(req.body);
 
-      const user = await db.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: { email: data.email.toLowerCase() },
         include: {
           patientProfile: true,
@@ -255,7 +257,7 @@ authRouter.post(
         isMfaRequired ? true : false
       );
 
-      await db.auditEvent.create({
+      await prisma.auditEvent.create({
         data: {
           userId: user.id,
           action: 'USER_LOGIN',
@@ -298,13 +300,13 @@ authRouter.post(
 authRouter.post('/logout', async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (req.session) {
-      await db.session.update({
+      await prisma.session.update({
         where: { id: req.session.id },
         data: { revokedAt: new Date() },
       });
 
       if (req.user) {
-        await db.auditEvent.create({
+        await prisma.auditEvent.create({
           data: {
             userId: req.user.id,
             action: 'USER_LOGOUT',
@@ -337,7 +339,7 @@ authRouter.get('/session', async (req: Request, res: Response) => {
     });
   }
 
-  const userMemberships = await db.membership.findMany({
+  const userMemberships = await prisma.membership.findMany({
     where: { userId: req.user.id },
     include: { organization: true },
   });
@@ -375,7 +377,7 @@ authRouter.post('/email/verify', async (req: Request, res: Response, next: NextF
     const { token } = VerifyEmailSchema.parse(req.body);
     const tokenHash = AuthService.hashToken(token);
 
-    const record = await db.emailVerificationToken.findUnique({
+    const record = await prisma.emailVerificationToken.findUnique({
       where: { tokenHash },
       include: { user: true },
     });
@@ -390,16 +392,16 @@ authRouter.post('/email/verify', async (req: Request, res: Response, next: NextF
       });
     }
 
-    await db.$transaction([
-      db.user.update({
+    await prisma.$transaction([
+      prisma.user.update({
         where: { id: record.userId },
         data: { isVerified: true },
       }),
-      db.emailVerificationToken.update({
+      prisma.emailVerificationToken.update({
         where: { id: record.id },
         data: { usedAt: new Date() },
       }),
-      db.auditEvent.create({
+      prisma.auditEvent.create({
         data: {
           userId: record.userId,
           action: 'EMAIL_VERIFIED',
@@ -425,7 +427,7 @@ authRouter.post('/email/verification/resend', rateLimiter(), async (req: Request
   try {
     const { email } = ResendVerificationSchema.parse(req.body);
 
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -434,7 +436,7 @@ authRouter.post('/email/verification/resend', rateLimiter(), async (req: Request
       const tokenHash = AuthService.hashToken(rawToken);
       const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-      await db.emailVerificationToken.create({
+      await prisma.emailVerificationToken.create({
         data: {
           userId: user.id,
           tokenHash,
@@ -460,7 +462,7 @@ authRouter.post('/password/forgot', rateLimiter(), async (req: Request, res: Res
   try {
     const { email } = ForgotPasswordSchema.parse(req.body);
 
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -469,7 +471,7 @@ authRouter.post('/password/forgot', rateLimiter(), async (req: Request, res: Res
       const tokenHash = AuthService.hashToken(rawToken);
       const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 
-      await db.passwordResetToken.create({
+      await prisma.passwordResetToken.create({
         data: {
           userId: user.id,
           tokenHash,
@@ -479,7 +481,7 @@ authRouter.post('/password/forgot', rateLimiter(), async (req: Request, res: Res
 
       await EmailService.sendPasswordResetEmail(user.email, rawToken);
 
-      await db.auditEvent.create({
+      await prisma.auditEvent.create({
         data: {
           userId: user.id,
           action: 'PASSWORD_RESET_REQUESTED',
@@ -507,7 +509,7 @@ authRouter.post('/password/reset', rateLimiter(), async (req: Request, res: Resp
     const { token, newPassword } = ResetPasswordSchema.parse(req.body);
     const tokenHash = AuthService.hashToken(token);
 
-    const resetRecord = await db.passwordResetToken.findUnique({
+    const resetRecord = await prisma.passwordResetToken.findUnique({
       where: { tokenHash },
       include: { user: true },
     });
@@ -524,21 +526,21 @@ authRouter.post('/password/reset', rateLimiter(), async (req: Request, res: Resp
 
     const passwordHash = await AuthService.hashPassword(newPassword);
 
-    await db.$transaction([
-      db.user.update({
+    await prisma.$transaction([
+      prisma.user.update({
         where: { id: resetRecord.userId },
         data: { passwordHash },
       }),
-      db.passwordResetToken.update({
+      prisma.passwordResetToken.update({
         where: { id: resetRecord.id },
         data: { usedAt: new Date() },
       }),
       // Revoke all existing sessions for security
-      db.session.updateMany({
+      prisma.session.updateMany({
         where: { userId: resetRecord.userId },
         data: { revokedAt: new Date() },
       }),
-      db.auditEvent.create({
+      prisma.auditEvent.create({
         data: {
           userId: resetRecord.userId,
           action: 'PASSWORD_RESET_COMPLETED',
@@ -565,7 +567,7 @@ authRouter.post('/password/change', requireAuth, async (req: Request, res: Respo
     const { currentPassword, newPassword } = ChangePasswordSchema.parse(req.body);
     const userId = req.user!.id;
 
-    const user = await db.user.findUnique({ where: { id: userId } });
+    const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return res.status(401).json({ success: false, error: { code: 'UNAUTHORIZED' } });
     }
@@ -583,12 +585,12 @@ authRouter.post('/password/change', requireAuth, async (req: Request, res: Respo
 
     const newHash = await AuthService.hashPassword(newPassword);
 
-    await db.user.update({
+    await prisma.user.update({
       where: { id: userId },
       data: { passwordHash: newHash },
     });
 
-    await db.auditEvent.create({
+    await prisma.auditEvent.create({
       data: {
         userId,
         action: 'PASSWORD_CHANGED',
@@ -616,7 +618,7 @@ authRouter.post('/mfa/setup', requireAuth, async (req: Request, res: Response, n
     const otpAuthUrl = AuthService.generateMfaOtpAuthUrl(user.email, secret);
 
     // Temporarily save secret on user until verified
-    await db.user.update({
+    await prisma.user.update({
       where: { id: user.id },
       data: { mfaSecret: secret },
     });
@@ -663,25 +665,25 @@ authRouter.post('/mfa/verify', requireAuth, async (req: Request, res: Response, 
     // Generate recovery codes
     const recoveryCodes = AuthService.generateRecoveryCodes(8);
 
-    await db.$transaction([
-      db.user.update({
+    await prisma.$transaction([
+      prisma.user.update({
         where: { id: user.id },
         data: { mfaEnabled: true },
       }),
-      db.session.update({
+      prisma.session.update({
         where: { id: req.session!.id },
         data: { isMfaVerified: true },
       }),
       // Store recovery code hashes
       ...recoveryCodes.map((rc) =>
-        db.mfaRecoveryCode.create({
+        prisma.mfaRecoveryCode.create({
           data: {
             userId: user.id,
             codeHash: AuthService.hashToken(rc),
           },
         })
       ),
-      db.auditEvent.create({
+      prisma.auditEvent.create({
         data: {
           userId: user.id,
           action: 'MFA_ENABLED',
@@ -720,7 +722,7 @@ authRouter.post('/mfa/challenge', rateLimiter(), async (req: Request, res: Respo
     // If session exists, verify for current session user
     let user = req.user;
     if (!user && req.session) {
-      user = await db.user.findUnique({ where: { id: req.session.userId } });
+      user = await prisma.user.findUnique({ where: { id: req.session.userId } });
     }
 
     if (!user || !user.mfaSecret) {
@@ -739,7 +741,7 @@ authRouter.post('/mfa/challenge', rateLimiter(), async (req: Request, res: Respo
     }
 
     if (req.session) {
-      await db.session.update({
+      await prisma.session.update({
         where: { id: req.session.id },
         data: { isMfaVerified: true },
       });
@@ -761,7 +763,7 @@ authRouter.post('/mfa/recovery', rateLimiter(), async (req: Request, res: Respon
   try {
     const { email, password, recoveryCode } = MfaRecoverySchema.parse(req.body);
 
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
 
@@ -782,7 +784,7 @@ authRouter.post('/mfa/recovery', rateLimiter(), async (req: Request, res: Respon
 
     const codeHash = AuthService.hashToken(recoveryCode.trim().toUpperCase());
 
-    const unusedCode = await db.mfaRecoveryCode.findFirst({
+    const unusedCode = await prisma.mfaRecoveryCode.findFirst({
       where: {
         userId: user.id,
         codeHash,
@@ -800,12 +802,12 @@ authRouter.post('/mfa/recovery', rateLimiter(), async (req: Request, res: Respon
       });
     }
 
-    await db.$transaction([
-      db.mfaRecoveryCode.update({
+    await prisma.$transaction([
+      prisma.mfaRecoveryCode.update({
         where: { id: unusedCode.id },
         data: { usedAt: new Date() },
       }),
-      db.auditEvent.create({
+      prisma.auditEvent.create({
         data: {
           userId: user.id,
           action: 'MFA_RECOVERY_CODE_USED',

@@ -10,3 +10,172 @@
 
 
 11:12:28 AM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:07:25 PM - File change detected. Starting incremental compilation...
+
+
+1:07:26 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:07:45 PM - File change detected. Starting incremental compilation...
+
+
+1:07:45 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:07:50 PM - File change detected. Starting incremental compilation...
+
+
+1:07:50 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:07:52 PM - File change detected. Starting incremental compilation...
+
+src/middleware/session.middleware.ts(34,30): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(38,28): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(121,16): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(163,30): error TS2339: Property 'mfaEnabled' does not exist on type '{ patientProfile: { id: string; organizationId: string | null; createdAt: Date; updatedAt: Date; userId: string; dateOfBirth: Date | null; gender: string | null; bloodGroup: string | null; genotype: string | null; emergencyContact: string | null; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(220,45): error TS2339: Property 'mfaEnabled' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(223,34): error TS2339: Property 'mfaSecret' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(224,76): error TS2339: Property 'mfaSecret' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(279,30): error TS2339: Property 'mfaEnabled' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(301,16): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(378,29): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(398,10): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(437,16): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(472,16): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(510,34): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(532,10): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(537,10): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(621,15): error TS2353: Object literal may only specify known properties, and 'mfaSecret' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'.
+src/routes/auth.routes.ts(669,17): error TS2353: Object literal may only specify known properties, and 'mfaEnabled' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'.
+src/routes/auth.routes.ts(671,10): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(677,12): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(742,16): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(785,33): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(804,10): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(88,33): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(108,35): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(125,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/facility.routes.ts(159,36): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(79,14): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(90,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(21,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(35,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(75,37): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(94,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(128,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(147,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(292,35): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(308,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(340,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(376,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(433,14): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(441,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type 'Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput'.
+
+1:07:54 PM - Found 41 errors. Watching for file changes.
+[2J[3J[H1:08:33 PM - File change detected. Starting incremental compilation...
+
+src/routes/auth.routes.ts(38,28): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(121,16): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(163,30): error TS2339: Property 'mfaEnabled' does not exist on type '{ patientProfile: { id: string; organizationId: string | null; createdAt: Date; updatedAt: Date; userId: string; dateOfBirth: Date | null; gender: string | null; bloodGroup: string | null; genotype: string | null; emergencyContact: string | null; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(220,45): error TS2339: Property 'mfaEnabled' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(223,34): error TS2339: Property 'mfaSecret' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(224,76): error TS2339: Property 'mfaSecret' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(279,30): error TS2339: Property 'mfaEnabled' does not exist on type '{ memberships: ({ organization: { id: string; name: string; createdAt: Date; updatedAt: Date; slug: string; rcNumber: string | null; isVerified: boolean; }; } & { id: string; organizationId: string; createdAt: Date; updatedAt: Date; userId: string; role: Role; })[]; patientProfile: { ...; } | null; } & { ...; }'.
+src/routes/auth.routes.ts(301,16): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(378,29): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(398,10): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(437,16): error TS2339: Property 'emailVerificationToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(472,16): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(510,34): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(532,10): error TS2339: Property 'passwordResetToken' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(537,10): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(621,15): error TS2353: Object literal may only specify known properties, and 'mfaSecret' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'.
+src/routes/auth.routes.ts(669,17): error TS2353: Object literal may only specify known properties, and 'mfaEnabled' does not exist in type '(Without<UserUpdateInput, UserUncheckedUpdateInput> & UserUncheckedUpdateInput) | (Without<...> & UserUpdateInput)'.
+src/routes/auth.routes.ts(671,10): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(677,12): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(742,16): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(785,33): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/auth.routes.ts(804,10): error TS2339: Property 'mfaRecoveryCode' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(88,33): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(108,35): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(125,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/facility.routes.ts(159,36): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(79,14): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(90,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(21,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(35,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(75,37): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(94,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(128,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(147,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(292,35): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(308,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(340,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(376,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(433,14): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(441,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type 'Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput'.
+
+1:08:33 PM - Found 40 errors. Watching for file changes.
+[2J[3J[H1:09:02 PM - File change detected. Starting incremental compilation...
+
+src/routes/facility.routes.ts(88,33): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(108,35): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(125,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/facility.routes.ts(159,36): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(79,14): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(90,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(21,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(35,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(75,37): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(94,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(128,36): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(147,34): error TS2339: Property 'organizationApplication' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(292,35): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(308,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/organization.routes.ts(340,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(376,33): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(433,14): error TS2339: Property 'invitation' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/organization.routes.ts(441,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type 'Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput'.
+
+1:09:02 PM - Found 18 errors. Watching for file changes.
+[2J[3J[H1:09:18 PM - File change detected. Starting incremental compilation...
+
+src/routes/facility.routes.ts(88,33): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(108,35): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(125,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/facility.routes.ts(159,36): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(79,14): error TS2339: Property 'session' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/me.routes.ts(90,9): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+
+1:09:19 PM - Found 6 errors. Watching for file changes.
+[2J[3J[H1:09:24 PM - File change detected. Starting incremental compilation...
+
+src/routes/facility.routes.ts(88,33): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(108,35): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/routes/facility.routes.ts(125,11): error TS2353: Object literal may only specify known properties, and 'organizationId' does not exist in type '(Without<AuditEventCreateInput, AuditEventUncheckedCreateInput> & AuditEventUncheckedCreateInput) | (Without<...> & AuditEventCreateInput)'.
+src/routes/facility.routes.ts(159,36): error TS2339: Property 'patientFacilityConnection' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+
+1:09:25 PM - Found 4 errors. Watching for file changes.
+[2J[3J[H1:09:32 PM - File change detected. Starting incremental compilation...
+
+
+1:09:32 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:09:41 PM - File change detected. Starting incremental compilation...
+
+
+1:09:41 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:09:43 PM - File change detected. Starting incremental compilation...
+
+
+1:09:43 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:09:45 PM - File change detected. Starting incremental compilation...
+
+
+1:09:45 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:09:47 PM - File change detected. Starting incremental compilation...
+
+
+1:09:47 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:10:26 PM - File change detected. Starting incremental compilation...
+
+
+1:10:26 PM - Found 0 errors. Watching for file changes.
+[2J[3J[H1:10:27 PM - File change detected. Starting incremental compilation...
+
+
+1:10:27 PM - Found 0 errors. Watching for file changes.
