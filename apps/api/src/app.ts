@@ -1,20 +1,30 @@
 import express, { Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { logger } from './logger.js';
+import { logger } from './logger';
 import { ContactFormSchema } from '@meditrack/shared';
+import { sessionMiddleware } from './middleware/session.middleware';
+import { authRouter } from './routes/auth.routes';
+import { organizationRouter } from './routes/organization.routes';
+import { meRouter } from './routes/me.routes';
+import { facilityRouter } from './routes/facility.routes';
 
 dotenv.config();
 
 export const app = express();
 
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    credentials: true,
+  })
+);
 app.use(express.json());
+app.use(cookieParser());
+app.use(sessionMiddleware as express.RequestHandler);
 
 // Health check endpoint
 app.get('/api/v1/health', (req: Request, res: Response) => {
@@ -22,25 +32,24 @@ app.get('/api/v1/health', (req: Request, res: Response) => {
     status: 'ok',
     timestamp: new Date().toISOString(),
     service: 'MediTrack Core API',
-    version: '1.0.0-phase1'
+    version: '1.0.0-phase2',
   });
 });
 
 // Readiness check endpoint
 app.get('/api/v1/readiness', (req: Request, res: Response) => {
-  // Checks database configuration & environment
   const dbConfigured = Boolean(process.env.DATABASE_URL);
   if (dbConfigured) {
     res.status(200).json({
       status: 'ready',
       database: 'connected',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } else {
     res.status(503).json({
       status: 'not_ready',
       database: 'disconnected',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 });
@@ -56,13 +65,20 @@ app.post('/api/v1/contact', (req: Request, res: Response, next: NextFunction) =>
       message: 'Thank you for reaching out to MediTrack. Your request has been logged and queued for response.',
       data: {
         referenceNumber: `MDT-${Date.now()}`,
-        receivedAt: new Date().toISOString()
-      }
+        receivedAt: new Date().toISOString(),
+      },
     });
   } catch (error) {
     next(error);
   }
 });
+
+// Mount Phase 2 Feature Routers
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/organizations', organizationRouter);
+app.use('/api/v1/admin', organizationRouter);
+app.use('/api/v1/me', meRouter);
+app.use('/api/v1', facilityRouter);
 
 // Centralized error handler
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
@@ -73,8 +89,8 @@ app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
       success: false,
       error: {
         code: 'VALIDATION_ERROR',
-        details: err.errors
-      }
+        details: err.errors,
+      },
     });
   }
 
@@ -82,7 +98,7 @@ app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     success: false,
     error: {
       code: 'INTERNAL_SERVER_ERROR',
-      message: 'An unexpected internal error occurred. Please try again later.'
-    }
+      message: err.message || 'An unexpected internal error occurred. Please try again later.',
+    },
   });
 });
