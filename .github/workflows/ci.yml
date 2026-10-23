@@ -1,0 +1,39 @@
+name: MediTrack CI Pipeline
+
+on:
+  push:
+    branches: [ main, master, 'jules-*' ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Validate Prisma Schema
+        run: DATABASE_URL="postgresql://test:test@localhost:5432/meditrack" npx prisma validate --schema=packages/database/prisma/schema.prisma
+
+      - name: Build Shared Packages
+        run: npm run build --workspace=@meditrack/shared && npm run build --workspace=@meditrack/database
+
+      - name: Run Type Checks
+        run: npm run typecheck
+
+      - name: Run Vitest Unit Tests
+        run: npm test
+
+      - name: Build Next.js Web App
+        run: npm run build --workspace=@meditrack/web

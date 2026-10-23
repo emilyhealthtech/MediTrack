@@ -1,112 +1,86 @@
-# MediTrack — Patient Appointment and Health Information System
+# MediTrack — Healthcare Appointment & Information Platform
 
-**A full-stack healthcare technology project built with TypeScript, Node.js, and PostgreSQL.**
+[![MediTrack CI Pipeline](https://github.com/meditrack/meditrack/actions/workflows/ci.yml/badge.svg)](https.github.com/meditrack/meditrack/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)
+[![Phase](https://img.shields.io/badge/Phase-1%20Foundation%20Complete-green.svg)](#)
 
-![Project Status](https://img.shields.io/badge/Status-In%20Development-yellow)
-![Frontend](https://img.shields.io/badge/Frontend-HTML5%20%7C%20CSS3%20%7C%20TypeScript-blue)
-![Backend](https://img.shields.io/badge/Backend-Node.js%20%7C%20Express-green)
-![Database](https://img.shields.io/badge/Database-PostgreSQL-blue)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+MediTrack is an enterprise-grade multi-tenant healthcare appointment scheduling and administrative health information SaaS designed specifically for private clinics, hospitals, diagnostic centers, and patients in Nigeria.
 
 ---
 
-## 1. Project Overview
+## 1. Architecture & Monorepo Structure
 
-MediTrack is a full-stack healthcare application designed to simplify patient appointment management and support the secure handling of basic healthcare administrative information.
-
-The system allows patients to create accounts, sign in securely, view available appointments, book appointments, and manage their bookings. Authorized healthcare staff can access a staff dashboard to manage appointments and monitor clinical activity.
-
-MediTrack is developed as an educational portfolio project using fictional data. It is not intended for clinical diagnosis, real patient data handling, or production medical deployment.
-
----
-
-## 2. Design System & Frontend Prototype
-
-A comprehensive design system and standalone HTML5/CSS3 prototype have been developed in this repository to establish the core visual hierarchy, component library, and interaction patterns before transitioning to full-stack TypeScript integration.
-
-### Design System Overview
-The design system is documented in full in [`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md). Key principles include:
-- **Patient-Centred Design:** Calm, empathetic, and clear user experience for patients under stress.
-- **Accessibility & Inclusivity:** Strict adherence to **WCAG 2.2 AA** guidelines (contrast ratios, focus indicators, aria attributes, touch targets >= 44px).
-- **Brand Palette:** Deep teal primary actions (`#0e7490`), slate blue accents (`#2563eb`), white surface cards, and clear feedback colors (success, warning, error, info).
-- **Typography:** Modern, screen-optimised sans-serif stack with responsive hierarchy.
-- **Design Tokens:** CSS custom properties (`--color-*`, `--space-*`, `--radius-*`, `--shadow-*`) for easy reusability across TypeScript frameworks.
-
----
-
-## 3. Technology Stack
-
-- **Design Tokens & Styles:** Raw CSS3 Custom Properties (no external heavy CSS frameworks).
-- **Prototype Engine:** HTML5 with minimal vanilla JavaScript (`script.js`).
-- **Planned Full-Stack Tech Stack:**
-  - **Frontend:** TypeScript, React
-  - **Backend:** Node.js, Express
-  - **Database:** PostgreSQL
-  - **Authentication:** Secure Session/JWT Auth
-
----
-
-## 4. Repository Structure
+The codebase is organized as an npm workspace monorepo:
 
 ```
-healthcare-app/
-├── DESIGN_SYSTEM.md         # Comprehensive design system documentation
-├── README.md                # Project overview and developer instructions
-├── docs/
-│   └── PRD.md               # Product Requirements Document
-└── prototype/               # Interactive frontend prototype
-    ├── index.html           # Patient Sign-In page
-    ├── register.html        # Account Registration page
-    ├── forgot-password.html # Password Recovery page
-    ├── styles.css           # Design system CSS tokens & component library
-    └── script.js            # Interactive prototype validation & toggles
+meditrack/
+├── apps/
+│   ├── api/             # Node.js & Express REST API server (/api/v1)
+│   └── web/             # Next.js App Router Web Application & Public Site
+├── packages/
+│   ├── database/        # Prisma ORM Schema, Client & Migrations
+│   └── shared/          # Shared TypeScript DTOs & Zod Validation Schemas
+├── docs/                # Architecture, System Design & Security Docs
+└── stitch_meditrack_healthcare_portal/ # Approved Google Stitch Design Specifications
 ```
 
 ---
 
-## 5. Instructions for Running the Prototype Locally
+## 2. Technology Stack
 
-No build tools or Node.js dependencies are required to run the prototype.
+- **Frontend:** Next.js 14, React 18, TypeScript, Tailwind CSS ("Clinical Clarity" Design System)
+- **Backend:** Node.js, Express.js, TypeScript, Pino (Structured Logging with Sensitive Data Redaction), Helmet, CORS
+- **Database & ORM:** PostgreSQL, Prisma ORM
+- **Testing:** Vitest, Supertest
+- **CI/CD:** GitHub Actions
 
-### Option A: Direct Browser File Opening
-1. Navigate to the `prototype/` directory on your file explorer.
-2. Double-click `index.html` (or right-click and select **Open with Browser**).
+---
 
-### Option B: Local Development Server (Recommended)
-You can run a lightweight local server using Python or Node.js:
+## 3. Getting Started & Local Development
 
-Using Python 3:
+### Prerequisites
+- Node.js >= v20.0.0
+- npm >= v10.0.0
+
+### Setup Commands
+
 ```bash
-python3 -m http.server 8000 --directory prototype
-```
-Open [http://localhost:8000](http://localhost:8000) in your web browser.
+# 1. Install dependencies
+npm install
 
-Using Node.js (`npx http-server` or `serve`):
-```bash
-npx serve prototype
+# 2. Build shared packages and apps
+npm run build
+
+# 3. Validate Prisma database schema
+DATABASE_URL="postgresql://user:pass@localhost:5432/meditrack" npx prisma validate --schema=packages/database/prisma/schema.prisma
+
+# 4. Run test suite
+npm test
+
+# 5. Start development servers
+npm run dev
 ```
 
 ---
 
-## 6. Functional vs. Simulated Features
+## 4. Public Website Pages (Phase 1 Approved Stitch Designs)
 
-| Feature | Prototype Status | Details |
-| :--- | :--- | :--- |
-| **Page Navigation** | Functional | Links connect Sign-In, Registration, and Recovery pages smoothly. |
-| **Password Visibility Toggle** | Functional | Interactive eye button toggles password visibility and updates ARIA labels. |
-| **Form Validation** | Functional | Client-side validation checks required fields, email format, password criteria, and consent. |
-| **Password Strength Indicator** | Functional | Live requirement checklist updates dynamically as user types password. |
-| **Simulated Submissions** | Simulated | Shows realistic loading states and feedback banners without sending network requests. |
-| **Authentication & Tokens** | Simulated | No real passwords or auth tokens are created, stored in browser storage, or sent across networks. |
-| **Password Reset Dispatches** | Simulated | Provides a privacy-focused confirmation message without revealing account existence. |
+- **Landing Page (`/`):** Hero, value propositions, live status cards.
+- **About Us (`/about`):** Mission, responsible AI principles, NDPA 2023 legal notice.
+- **Features & Services (`/features`):** Scheduling, multi-tenant isolation, audit trails, subscriptions.
+- **FAQ (`/faq`):** Interactive accordion covering onboarding and scope.
+- **Contact Us (`/contact`):** Inquiry form connected to API with Zod validation.
+- **Legal Draft Pages:**
+  - Terms of Service (`/terms`)
+  - Privacy Policy (`/privacy`)
+  - Cookie Policy (`/cookies`)
+  - Consent & Data Use (`/consent`)
 
 ---
 
-## 7. Future Implementation Milestones
+## 5. Security & Privacy Highlights
 
-1. **Phase 1 (Completed):** Design System Documentation & HTML/CSS/JS Prototype.
-2. **Phase 2:** Translate CSS Tokens to TypeScript component library (React styled components or Tailwind config).
-3. **Phase 3:** Node.js Express Backend & PostgreSQL Database Setup with Prisma/Knex migration.
-4. **Phase 4:** Secure Authentication API implementation (Argon2/Bcrypt hashing, rate limiting, HttpOnly cookies).
-5. **Phase 5:** Patient Dashboard & Appointment Booking Workflow.
-6. **Phase 6:** Staff Portal & Administrative Reporting Dashboard.
+- **NDPA 2023 Compliance Readiness:** Draft documentation pending qualified legal review.
+- **Multi-Tenant Isolation:** Explicit `organizationId` partitioning across all database models.
+- **Data Redaction:** Sensitive parameters (passwords, PHI) are automatically redacted in server logs.
+- **Responsible AI Scope:** Restricted to administrative assistance. No autonomous clinical diagnosis or prescribing.

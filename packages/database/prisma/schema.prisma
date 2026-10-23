@@ -1,0 +1,197 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  PATIENT
+  FACILITY_STAFF
+  FACILITY_ADMIN
+  SYSTEM_ADMIN
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIALING
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+model User {
+  id            String       @id @default(uuid())
+  email         String       @unique
+  passwordHash  String
+  fullName      String
+  phoneNumber   String?
+  role          Role         @default(PATIENT)
+  isVerified    Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  memberships   Membership[]
+  patientProfile Patient?
+  auditEvents   AuditEvent[]
+
+  @@map("users")
+}
+
+model Organization {
+  id            String       @id @default(uuid())
+  name          String
+  slug          String       @unique
+  rcNumber      String?      // Nigerian CAC RC Number
+  isVerified    Boolean      @default(false)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  facilities    Facility[]
+  memberships   Membership[]
+  subscriptions Subscription[]
+  patients      Patient[]
+  appointments  Appointment[]
+
+  @@map("organizations")
+}
+
+model Facility {
+  id             String       @id @default(uuid())
+  organizationId String
+  name           String
+  address        String
+  city           String
+  state          String       // Nigerian state e.g. Lagos, Abuja, Kano
+  phone          String
+  email          String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  appointments   Appointment[]
+
+  @@map("facilities")
+}
+
+model Membership {
+  id             String       @id @default(uuid())
+  userId         String
+  organizationId String
+  role           Role         @default(FACILITY_STAFF)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
+  @@map("memberships")
+}
+
+model Patient {
+  id             String       @id @default(uuid())
+  userId         String       @unique
+  organizationId String?
+  dateOfBirth    DateTime?
+  gender         String?
+  bloodGroup     String?
+  genotype       String?      // e.g., AA, AS, SS
+  emergencyContact String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  appointments   Appointment[]
+
+  @@map("patients")
+}
+
+model Appointment {
+  id             String            @id @default(uuid())
+  organizationId String
+  facilityId     String
+  patientId      String
+  scheduledAt    DateTime
+  department     String
+  reason         String?
+  status         AppointmentStatus @default(SCHEDULED)
+  notes          String?
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  facility       Facility          @relation(fields: [facilityId], references: [id], onDelete: Cascade)
+  patient        Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@map("appointments")
+}
+
+model SubscriptionPlan {
+  id            String         @id @default(uuid())
+  name          String
+  tier          String         @unique // e.g. STARTER, PROFESSIONAL, ENTERPRISE
+  priceNGN      Int
+  maxFacilities Int
+  maxStaff      Int
+  createdAt     DateTime       @default(now())
+
+  subscriptions Subscription[]
+
+  @@map("subscription_plans")
+}
+
+model Subscription {
+  id             String             @id @default(uuid())
+  organizationId String             @unique
+  planId         String
+  status         SubscriptionStatus @default(TRIALING)
+  currentPeriodEnd DateTime
+  createdAt      DateTime           @default(now())
+
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan           SubscriptionPlan   @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@map("subscriptions")
+}
+
+model AuditEvent {
+  id          String   @id @default(uuid())
+  userId      String?
+  action      String
+  entity      String
+  entityId    String?
+  ipAddress   String?
+  userAgent   String?
+  detailsJson String?
+  createdAt   DateTime @default(now())
+
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("audit_events")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  recipient String   // Email or phone number
+  channel   String   // EMAIL, SMS, IN_APP
+  subject   String?
+  content   String
+  isSent    Boolean  @default(false)
+  sentAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@map("notifications")
+}
