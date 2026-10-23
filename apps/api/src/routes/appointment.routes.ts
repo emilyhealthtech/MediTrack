@@ -228,6 +228,61 @@ appointmentRouter.get(
   }
 );
 
+// Generate iCalendar (.ics) export file for appointment integration
+appointmentRouter.get(
+  '/:id/ics',
+  requireAuth,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const appointment = await db.appointment.findUnique({
+        where: { id: req.params.id },
+        include: {
+          facility: true,
+          patient: { include: { user: true } },
+          provider: true,
+        },
+      });
+
+      if (!appointment) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Appointment not found.' },
+        });
+      }
+
+      const startDate = new Date(appointment.scheduledAt);
+      const endDate = new Date(startDate.getTime() + appointment.durationMinutes * 60000);
+
+      const formatDate = (date: Date) =>
+        date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//MediTrack//Healthcare Appointments//EN',
+        'METHOD:REQUEST',
+        'BEGIN:VEVENT',
+        `UID:appointment-${appointment.id}@meditrack.ng`,
+        `DTSTAMP:${formatDate(new Date())}`,
+        `DTSTART:${formatDate(startDate)}`,
+        `DTEND:${formatDate(endDate)}`,
+        `SUMMARY:Healthcare Appointment — ${appointment.facility.name}`,
+        `DESCRIPTION:Department: ${appointment.department}\\nConsultation Mode: ${appointment.mode}`,
+        `LOCATION:${appointment.facility.name}, ${appointment.facility.address}, ${appointment.facility.city}`,
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+
+      res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+      res.setHeader('Content-Disposition', `attachment; filename="appointment-${appointment.id}.ics"`);
+      return res.status(200).send(icsContent);
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
 // Staff Create Appointment
 appointmentRouter.post(
   '/',

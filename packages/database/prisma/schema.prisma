@@ -115,6 +115,7 @@ model Organization {
 
   facilities             Facility[]
   memberships            Membership[]
+  invitations            Invitation[]
   subscriptions          Subscription[]
   patients               Patient[]
   appointments           Appointment[]
@@ -149,6 +150,7 @@ model Membership {
   userId         String
   organizationId String
   role           Role         @default(FACILITY_STAFF)
+  isActive       Boolean      @default(true)
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
@@ -410,14 +412,52 @@ model AuditEvent {
 }
 
 model Notification {
-  id        String   @id @default(uuid())
-  recipient String   // Email or phone number
-  channel   String   // EMAIL, SMS, IN_APP
-  subject   String?
-  content   String
-  isSent    Boolean  @default(false)
-  sentAt    DateTime?
-  createdAt DateTime @default(now())
+  id            String   @id @default(uuid())
+  recipient     String   // Email or phone number
+  channel       String   // EMAIL, SMS, IN_APP
+  subject       String?
+  content       String
+  isSent        Boolean  @default(false)
+  status        String   @default("SENT") // SENT, FAILED, PENDING
+  failureReason String?
+  retryCount    Int      @default(0)
+  sentAt        DateTime?
+  createdAt     DateTime @default(now())
 
   @@map("notifications")
+}
+
+model OrganizationApplication {
+  id               String    @id @default(uuid())
+  organizationName String
+  slug             String    @unique
+  rcNumber         String?
+  contactName      String
+  contactEmail     String
+  contactPhone     String?
+  state            String
+  status           String    @default("PENDING") // PENDING, APPROVED, REJECTED
+  reviewNotes      String?
+  reviewedByUserId String?
+  reviewedAt       DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  @@map("organization_applications")
+}
+
+model Invitation {
+  id             String       @id @default(uuid())
+  organizationId String
+  email          String
+  role           Role         @default(FACILITY_STAFF)
+  tokenHash      String       @unique
+  inviterId      String
+  expiresAt      DateTime
+  acceptedAt     DateTime?
+  createdAt      DateTime     @default(now())
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@map("invitations")
 }

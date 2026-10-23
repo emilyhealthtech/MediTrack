@@ -14,6 +14,7 @@ export default function Header() {
     { name: 'Patient Dashboard', href: '/patient/dashboard' },
     { name: 'Health Profile', href: '/patient/health-profile' },
     { name: 'Staff Patient Directory', href: '/staff/patients' },
+    { name: 'Org Admin', href: '/staff/organization' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];

@@ -1,9 +1,14 @@
 
-> @meditrack/web@1.0.0 start
-> next start
+> @meditrack/web@1.0.0 dev
+> next dev
 
   ▲ Next.js 14.2.35
   - Local:        http://localhost:3000
 
  ✓ Starting...
- ✓ Ready in 401ms
+ ✓ Ready in 1946ms
+ ○ Compiling /staff/organization ...
+ ✓ Compiled /staff/organization in 6s (556 modules)
+ ✓ Compiled in 725ms (282 modules)
+ GET /staff/organization 200 in 6762ms
+ GET /staff/organization 200 in 57ms

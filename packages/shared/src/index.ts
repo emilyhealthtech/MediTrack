@@ -145,6 +145,30 @@ export const OrganizationReviewSchema = z.object({
 
 export type OrganizationReviewInput = z.infer<typeof OrganizationReviewSchema>;
 
+export const UpdateOrganizationSchema = z.object({
+  name: z.string().min(3, 'Organization name must be at least 3 characters').optional(),
+  rcNumber: z.string().nullable().optional(),
+  contactPhone: z.string().nullable().optional(),
+  state: z.string().min(2, 'State is required').optional(),
+});
+
+export type UpdateOrganizationInput = z.infer<typeof UpdateOrganizationSchema>;
+
+export const UpdateMemberRoleSchema = z.object({
+  role: z.enum(['FACILITY_STAFF', 'FACILITY_ADMIN']).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type UpdateMemberRoleInput = z.infer<typeof UpdateMemberRoleSchema>;
+
+export const OperationalReportQuerySchema = z.object({
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  facilityId: z.string().optional(),
+});
+
+export type OperationalReportQueryInput = z.infer<typeof OperationalReportQuerySchema>;
+
 // Staff Invitations
 export const StaffInviteSchema = z.object({
   email: z.string().email('Valid email address is required'),
