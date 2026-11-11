@@ -347,6 +347,78 @@ export class AppointmentService {
   }
 
   /**
+   * Get Appointment by ID with full details and audit event history
+   */
+  static async getAppointmentById(appointmentId: string) {
+    const appointment = await db.appointment.findUnique({
+      where: { id: appointmentId },
+      include: {
+        facility: true,
+        patient: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                fullName: true,
+                email: true,
+                phoneNumber: true,
+              },
+            },
+          },
+        },
+        provider: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            phoneNumber: true,
+          },
+        },
+        encounters: {
+          select: {
+            id: true,
+            encounterDate: true,
+            status: true,
+            chiefComplaint: true,
+            clinician: {
+              select: {
+                fullName: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!appointment) {
+      return null;
+    }
+
+    const auditTrail = await db.auditEvent.findMany({
+      where: {
+        entity: 'Appointment',
+        entityId: appointmentId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+            role: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return {
+      ...appointment,
+      auditTrail,
+    };
+  }
+
+  /**
    * Get Appointments with filtering
    */
   static async getAppointments(params: {
@@ -354,9 +426,11 @@ export class AppointmentService {
     facilityId?: string;
     patientId?: string;
     providerId?: string;
+    department?: string;
     status?: string;
     startDate?: string;
     endDate?: string;
+    search?: string;
   }) {
     const where: any = {};
 
@@ -364,12 +438,26 @@ export class AppointmentService {
     if (params.facilityId) where.facilityId = params.facilityId;
     if (params.patientId) where.patientId = params.patientId;
     if (params.providerId) where.providerId = params.providerId;
+    if (params.department && params.department !== 'ALL') where.department = params.department;
     if (params.status && params.status !== 'ALL') where.status = params.status;
 
     if (params.startDate || params.endDate) {
       where.scheduledAt = {};
       if (params.startDate) where.scheduledAt.gte = new Date(params.startDate);
       if (params.endDate) where.scheduledAt.lte = new Date(params.endDate);
+    }
+
+    if (params.search) {
+      const q = params.search.trim();
+      where.OR = [
+        { id: { contains: q, mode: 'insensitive' } },
+        { department: { contains: q, mode: 'insensitive' } },
+        { reason: { contains: q, mode: 'insensitive' } },
+        { patient: { id: { contains: q, mode: 'insensitive' } } },
+        { patient: { user: { fullName: { contains: q, mode: 'insensitive' } } } },
+        { patient: { user: { email: { contains: q, mode: 'insensitive' } } } },
+        { provider: { fullName: { contains: q, mode: 'insensitive' } } },
+      ];
     }
 
     return db.appointment.findMany({
@@ -380,6 +468,30 @@ export class AppointmentService {
         provider: true,
       },
       orderBy: { scheduledAt: 'asc' },
+    });
+  }
+
+  /**
+   * Get Provider Availabilities
+   */
+  static async getProviderAvailabilities(organizationId: string, facilityId?: string, providerId?: string) {
+    const where: any = { organizationId };
+    if (facilityId) where.facilityId = facilityId;
+    if (providerId) where.providerId = providerId;
+
+    return db.providerAvailability.findMany({
+      where,
+      include: {
+        facility: true,
+        provider: {
+          select: {
+            id: true,
+            fullName: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: [{ dayOfWeek: 'asc' }, { startTime: 'asc' }],
     });
   }
 
