@@ -169,6 +169,29 @@ export const OperationalReportQuerySchema = z.object({
 
 export type OperationalReportQueryInput = z.infer<typeof OperationalReportQuerySchema>;
 
+// Analytics Dashboard Schemas
+export const AnalyticsQuerySchema = z.object({
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  granularity: z.enum(['daily', 'weekly', 'monthly', 'yearly']).default('daily'),
+  facilityId: z.string().optional(),
+  department: z.string().optional(),
+  providerId: z.string().optional(),
+});
+
+export type AnalyticsQueryInput = z.infer<typeof AnalyticsQuerySchema>;
+
+export const AnalyticsExportQuerySchema = z.object({
+  startDate: z.string().optional(),
+  endDate: z.string().optional(),
+  facilityId: z.string().optional(),
+  department: z.string().optional(),
+  format: z.enum(['csv']).default('csv'),
+  reportType: z.enum(['overview', 'appointments', 'patients', 'departments', 'providers']).default('overview'),
+});
+
+export type AnalyticsExportQueryInput = z.infer<typeof AnalyticsExportQuerySchema>;
+
 // Staff Invitations
 export const StaffInviteSchema = z.object({
   email: z.string().email('Valid email address is required'),
