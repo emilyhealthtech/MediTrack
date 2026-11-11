@@ -213,9 +213,11 @@ appointmentRouter.get(
         facilityId: req.query.facilityId as string,
         patientId: req.query.patientId as string,
         providerId: req.query.providerId as string,
+        department: req.query.department as string,
         status: req.query.status as string,
         startDate: req.query.startDate as string,
         endDate: req.query.endDate as string,
+        search: req.query.search as string,
       });
 
       return res.status(200).json({
@@ -223,6 +225,149 @@ appointmentRouter.get(
         data: appointments,
       });
     } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// Get Specific Appointment Details with Audit History (Staff or Patient)
+appointmentRouter.get(
+  '/:id',
+  requireAuth,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const appointment = await AppointmentService.getAppointmentById(req.params.id);
+
+      if (!appointment) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Appointment not found.' },
+        });
+      }
+
+      // Check access: System admin, or Patient owner, or Org member
+      if (req.user?.role === 'SYSTEM_ADMIN') {
+        return res.status(200).json({ success: true, data: appointment });
+      }
+
+      if (appointment.patient?.userId === req.user!.id) {
+        return res.status(200).json({ success: true, data: appointment });
+      }
+
+      // Check staff membership in appointment organization
+      const membership = await db.membership.findUnique({
+        where: {
+          userId_organizationId: {
+            userId: req.user!.id,
+            organizationId: appointment.organizationId,
+          },
+        },
+      });
+
+      if (!membership || !membership.isActive) {
+        return res.status(403).json({
+          success: false,
+          error: { code: 'FORBIDDEN', message: 'Access denied. You do not have permission to view this appointment.' },
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: appointment,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
+);
+
+// Staff Reschedule Appointment
+appointmentRouter.put(
+  '/:id/reschedule',
+  requireAuth,
+  requireRole('FACILITY_STAFF', 'FACILITY_ADMIN', 'SYSTEM_ADMIN'),
+  requireStaffOrgContext,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const validated = RescheduleAppointmentSchema.parse(req.body);
+      const appointment = await db.appointment.findUnique({ where: { id: req.params.id } });
+
+      if (!appointment || appointment.organizationId !== (req as any).activeOrgId) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Appointment not found or access denied.' },
+        });
+      }
+
+      const updated = await AppointmentService.rescheduleAppointment(
+        req.params.id,
+        validated,
+        req.user!.id,
+        req.ip,
+        req.headers['user-agent']
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: 'Appointment rescheduled successfully.',
+        data: updated,
+      });
+    } catch (error: any) {
+      if (error.code === 'PROVIDER_CONFLICT' || error.code === 'PATIENT_CONFLICT') {
+        return res.status(409).json({
+          success: false,
+          error: { code: error.code, message: error.message },
+        });
+      }
+      if (error.code === 'INVALID_STATUS') {
+        return res.status(400).json({
+          success: false,
+          error: { code: error.code, message: error.message },
+        });
+      }
+      return next(error);
+    }
+  }
+);
+
+// Staff Cancel Appointment
+appointmentRouter.put(
+  '/:id/cancel',
+  requireAuth,
+  requireRole('FACILITY_STAFF', 'FACILITY_ADMIN', 'SYSTEM_ADMIN'),
+  requireStaffOrgContext,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const validated = CancelAppointmentSchema.parse(req.body);
+      const appointment = await db.appointment.findUnique({ where: { id: req.params.id } });
+
+      if (!appointment || appointment.organizationId !== (req as any).activeOrgId) {
+        return res.status(404).json({
+          success: false,
+          error: { code: 'NOT_FOUND', message: 'Appointment not found or access denied.' },
+        });
+      }
+
+      const updated = await AppointmentService.cancelAppointment(
+        req.params.id,
+        validated.cancellationReason,
+        req.user!.id,
+        req.ip,
+        req.headers['user-agent']
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: 'Appointment cancelled successfully.',
+        data: updated,
+      });
+    } catch (error: any) {
+      if (error.code === 'INVALID_STATUS') {
+        return res.status(400).json({
+          success: false,
+          error: { code: error.code, message: error.message },
+        });
+      }
       return next(error);
     }
   }
@@ -357,6 +502,31 @@ appointmentRouter.patch(
           error: { code: error.code, message: error.message },
         });
       }
+      return next(error);
+    }
+  }
+);
+
+// Staff List Provider Availabilities
+appointmentRouter.get(
+  '/availability/rules',
+  requireAuth,
+  requireRole('FACILITY_STAFF', 'FACILITY_ADMIN', 'SYSTEM_ADMIN'),
+  requireStaffOrgContext,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const activeOrgId = (req as any).activeOrgId;
+      const rules = await AppointmentService.getProviderAvailabilities(
+        activeOrgId,
+        req.query.facilityId as string,
+        req.query.providerId as string
+      );
+
+      return res.status(200).json({
+        success: true,
+        data: rules,
+      });
+    } catch (error) {
       return next(error);
     }
   }

@@ -91,13 +91,20 @@ vi.mock('@meditrack/database', () => ({
     auditEvent: {
       create: vi.fn(async ({ data }: any) => {
         mockAuditEvents.push(data);
-        return data;
+        return { id: `audit-${Date.now()}`, ...data, createdAt: new Date() };
+      }),
+      findMany: vi.fn(async ({ where }: any) => {
+        return mockAuditEvents.filter((a) => {
+          if (where.entity && a.entity !== where.entity) return false;
+          if (where.entityId && a.entityId !== where.entityId) return false;
+          return true;
+        });
       }),
     },
   },
 }));
 
-describe('Phase 4 — Appointment Scheduling & Availability Unit Tests', () => {
+describe('Phase 4 & Appointment Management Dashboard Unit Tests', () => {
   beforeEach(() => {
     mockAppointments.length = 0;
     mockAvailabilities.length = 0;
@@ -171,5 +178,98 @@ describe('Phase 4 — Appointment Scheduling & Availability Unit Tests', () => {
     await expect(
       AppointmentService.updateAppointmentStatus('appt-1', { status: 'IN_PROGRESS' }, 'usr-staff-1')
     ).rejects.toThrow('Invalid status transition');
+  });
+
+  it('should allow marking appointment as NO_SHOW (missed) from SCHEDULED or CONFIRMED', async () => {
+    mockAppointments.push({
+      id: 'appt-noshow',
+      organizationId: 'org-1',
+      status: 'SCHEDULED',
+    });
+
+    const updated = await AppointmentService.updateAppointmentStatus(
+      'appt-noshow',
+      { status: 'NO_SHOW', notes: 'Patient did not arrive for scheduled slot' },
+      'usr-staff-1'
+    );
+
+    expect(updated.status).toBe('NO_SHOW');
+  });
+
+  it('should reschedule appointment with conflict checking and audit trail', async () => {
+    mockAppointments.push({
+      id: 'appt-resched',
+      organizationId: 'org-1',
+      facilityId: 'fac-1',
+      patientId: 'pat-1',
+      providerId: 'usr-doc-1',
+      scheduledAt: new Date('2025-06-10T10:00:00Z'),
+      durationMinutes: 30,
+      status: 'SCHEDULED',
+    });
+
+    const rescheduled = await AppointmentService.rescheduleAppointment(
+      'appt-resched',
+      {
+        scheduledAt: '2025-06-11T14:00:00Z',
+        reason: 'Patient requested afternoon time',
+      },
+      'usr-staff-1'
+    );
+
+    expect(rescheduled.scheduledAt).toEqual(new Date('2025-06-11T14:00:00Z'));
+    expect(mockAuditEvents.some((e) => e.action === 'APPOINTMENT_RESCHEDULED')).toBe(true);
+  });
+
+  it('should cancel appointment and log audit event', async () => {
+    mockAppointments.push({
+      id: 'appt-cancel',
+      organizationId: 'org-1',
+      facilityId: 'fac-1',
+      patientId: 'pat-1',
+      providerId: 'usr-doc-1',
+      scheduledAt: new Date('2025-06-10T10:00:00Z'),
+      durationMinutes: 30,
+      status: 'SCHEDULED',
+    });
+
+    const cancelled = await AppointmentService.cancelAppointment(
+      'appt-cancel',
+      'Patient unwell and requested cancellation',
+      'usr-staff-1'
+    );
+
+    expect(cancelled.status).toBe('CANCELLED');
+    expect(cancelled.cancellationReason).toBe('Patient unwell and requested cancellation');
+    expect(mockAuditEvents.some((e) => e.action === 'APPOINTMENT_CANCELLED')).toBe(true);
+  });
+
+  it('should retrieve appointment by ID including audit trail', async () => {
+    mockAppointments.push({
+      id: 'appt-detail-1',
+      organizationId: 'org-1',
+      facilityId: 'fac-1',
+      patientId: 'pat-1',
+      providerId: 'usr-doc-1',
+      department: 'Cardiology',
+      scheduledAt: new Date('2025-06-10T10:00:00Z'),
+      durationMinutes: 30,
+      status: 'CONFIRMED',
+    });
+
+    mockAuditEvents.push({
+      id: 'audit-1',
+      action: 'APPOINTMENT_CREATED',
+      entity: 'Appointment',
+      entityId: 'appt-detail-1',
+      userId: 'usr-staff-1',
+      createdAt: new Date(),
+    });
+
+    const result = await AppointmentService.getAppointmentById('appt-detail-1');
+    expect(result).not.toBeNull();
+    expect(result!.id).toBe('appt-detail-1');
+    expect(result!.auditTrail).toBeDefined();
+    expect(result!.auditTrail.length).toBe(1);
   });
 });

@@ -13,6 +13,7 @@ export default function Header() {
     { name: 'Home', href: '/' },
     { name: 'Patient Dashboard', href: '/patient/dashboard' },
     { name: 'Health Profile', href: '/patient/health-profile' },
+    { name: 'Appointments', href: '/staff/appointments' },
     { name: 'Staff Patient Directory', href: '/staff/patients' },
     { name: 'Analytics', href: '/staff/analytics' },
     { name: 'Org Admin', href: '/staff/organization' },
