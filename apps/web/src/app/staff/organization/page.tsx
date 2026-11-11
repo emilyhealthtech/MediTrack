@@ -581,6 +581,19 @@ export default function OrganizationAdminPage() {
         {/* Tab 4: Operational Reports */}
         {activeTab === 'reports' && (
           <div className="space-y-6 text-xs">
+            <div className="flex items-center justify-between p-4 bg-teal-50 border border-teal-200 rounded-2xl">
+              <div>
+                <p className="font-bold text-teal-900 text-sm">Full Analytics & BI Dashboard Available</p>
+                <p className="text-teal-700 text-xs mt-0.5">Explore interactive trends, patient demographics, department performance, and CSV exports.</p>
+              </div>
+              <a
+                href="/staff/analytics"
+                className="px-4 py-2 bg-teal-700 hover:bg-teal-800 text-white font-semibold rounded-lg flex items-center gap-1.5 transition-colors"
+              >
+                Open Analytics <BarChart3 className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
             {loadingReports ? (
               <p className="p-8 text-center text-slate-500">Loading operational activity reports...</p>
             ) : reports ? (

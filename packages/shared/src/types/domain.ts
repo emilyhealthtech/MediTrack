@@ -142,3 +142,94 @@ export interface PatientDashboardDTO {
   notifications: any[];
   facilityConnectionsCount: number;
 }
+
+export interface AnalyticsSummaryStats {
+  totalRegisteredPatients: number;
+  newPatients: number;
+  totalAppointments: number;
+  completedAppointments: number;
+  pendingAppointments: number;
+  cancelledAppointments: number;
+  missedAppointments: number;
+  activeHealthcareProviders: number;
+}
+
+export interface TimeSeriesPoint {
+  date: string; // ISO date or formatted period e.g. "2025-05-01" or "2025-W20"
+  label: string;
+  count: number;
+}
+
+export interface DemographicsDistribution {
+  gender: {
+    male: number;
+    female: number;
+    other: number;
+    unspecified: number;
+  };
+  ageGroups: {
+    group: string;
+    count: number;
+    percentage: number;
+  }[];
+}
+
+export interface DepartmentPerformance {
+  department: string;
+  totalAppointments: number;
+  completedAppointments: number;
+  cancelledAppointments: number;
+  completionRate: number;
+}
+
+export interface RequestedServiceStat {
+  service: string;
+  type: 'department' | 'consultationMode';
+  count: number;
+  percentage: number;
+}
+
+export interface AppointmentVisitStatistics {
+  overallCompletionRate: number;
+  overallCancellationRate: number;
+  overallNoShowRate: number;
+  averageDurationMinutes: number;
+  modeDistribution: {
+    inPerson: number;
+    virtual: number;
+    telephone: number;
+  };
+}
+
+export interface ProviderActivityStat {
+  providerId: string;
+  providerName: string;
+  email: string;
+  totalAppointments: number;
+  completedAppointments: number;
+  scheduledAppointments: number;
+  completionRate: number;
+}
+
+export interface AnalyticsDashboardDTO {
+  organizationId: string;
+  organizationName: string;
+  period: {
+    startDate: string;
+    endDate: string;
+    granularity: 'daily' | 'weekly' | 'monthly' | 'yearly';
+  };
+  summaryStats: AnalyticsSummaryStats;
+  patientRegistrationTrends: TimeSeriesPoint[];
+  appointmentTrends: {
+    total: TimeSeriesPoint[];
+    completed: TimeSeriesPoint[];
+    cancelled: TimeSeriesPoint[];
+    missed: TimeSeriesPoint[];
+  };
+  patientDemographics: DemographicsDistribution;
+  departmentPerformance: DepartmentPerformance[];
+  mostRequestedServices: RequestedServiceStat[];
+  visitStatistics: AppointmentVisitStatistics;
+  providerActivity: ProviderActivityStat[];
+}

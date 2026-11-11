@@ -13,6 +13,7 @@ import { facilityRouter } from './routes/facility.routes';
 import { patientRouter } from './routes/patient.routes';
 import { appointmentRouter } from './routes/appointment.routes';
 import { encounterRouter } from './routes/encounter.routes';
+import { analyticsRouter } from './routes/analytics.routes';
 
 dotenv.config();
 
@@ -84,6 +85,7 @@ app.use('/api/v1/me', meRouter);
 app.use('/api/v1/patients', patientRouter);
 app.use('/api/v1/appointments', appointmentRouter);
 app.use('/api/v1/encounters', encounterRouter);
+app.use('/api/v1', analyticsRouter);
 app.use('/api/v1', facilityRouter);
 
 // Centralized error handler
